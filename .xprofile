@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# ~/.xprofile
+
+# sourced at boot by ~/.xinitrc and display managers like lightdm
+
+#=== add ~/.local/bin to path
+export PATH="$HOME/.local/bin:$PATH"
+
+# super alone simulates Alt-F1
+ksuperkey -e 'Super_L=Alt_L|F1' &
+ksuperkey -e 'Super_R=Alt_L|F1' &
+
+# dpms: timeout sleep off
+#xset dpms 600 900 1200
+# turn off system beep
+xset -b
+
+#==== load Xresources
+xrdb merge ~/.Xresources
+
+#=== kunst exports
+export KUNST_SIZE="250x250"
+export KUNST_POSITION="+0+0"
+export KUNST_MUSIC_DIR="/home/ron/Music/"
