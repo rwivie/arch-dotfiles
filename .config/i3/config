@@ -8,7 +8,7 @@ set $mod Mod4
 #==== font settings ====
 #=======================
 
-font pango:Fira Sans Regular 11
+font pango:JetBrainsMono Nerd Font 11
 
 #================
 #==== colors ====
@@ -26,6 +26,13 @@ client.focused_inactive #5E81AC #2E343c #cccccc #5E81AC   #5E81AC
 client.unfocused        #4C566A #2E343c #cccccc #4C566A   #4C566A
 client.urgent           #1793D1 #2E343c #ffffff #1793D1   #1793D1
 
+#==== dracula  ====
+#client.focused          #BD93F9 #BD93F9 #F8F8F2 #BD93F9   #BD93F9
+#client.focused_inactive #BD93F9 #44475A #F8F8F2 #BD93F9   #BD93F9
+#client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+#client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+#client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
 #========================
 #==== direction keys ====
 #========================
@@ -37,13 +44,13 @@ set $right semicolon
 #========================
 #==== set workspaces ====
 #========================
-set $WS1 "1: "
-set $WS2 "2: "
+set $WS1 "1: "
+set $WS2 "2: "
 set $WS3 "3: "
-set $WS4 "4: "
+set $WS4 "4: "
 set $WS5 "5: "
 set $WS6 "6: "
-set $WS7 "7: "
+set $WS7 "7: "
 set $WS8 "8: "
 set $WS9 "9: "
 
@@ -277,6 +284,7 @@ assign [class="Lutris"] $ws6
 assign [class="Mousepad"] $ws4
 assign [class="Leafpad"] $ws4
 assign [class="Gimp-2.10"] $ws5
+assign [class="Cider"] $ws7
 #assign [class="telegram-desktop"] $ws8
 assign [class="TelegramDesktop"] $ws8
 assign [class="Caprine"] $ws8
@@ -310,3 +318,5 @@ exec --no-startup-id mpDris2
 #exec --no-startup-id cornora -br "skippy-xd" -bl "sleep 1; xset dpms force off"
 exec --no-startup-id cornora -br "skippy-xd" -bl "rofi_run -d"
 exec --no-startup-id pasystray --no-notify
+exec --no-startup-id xfce4-notes
+
