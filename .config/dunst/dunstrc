@@ -186,7 +186,7 @@
 
     # Paths to default icons.
     #icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-    icon_path = /usr/share/icons/gnome/scalable/status/:/usr/share/icons/gnome/scalable/devices/:/usr/share/icons/gnome/32x32/status/:/usr/share/icons/Papirus/32x32/apps/:/usr/share/icons/Papirus-Dark/24x24/actions/:/usr/share/icons/Papirus/22x22/panel/:/usr/share/icons/Papirus/32x32/devices/
+    icon_path = /usr/share/icons/gnome/scalable/status/:/usr/share/icons/gnome/scalable/devices/:/usr/share/icons/gnome/32x32/status/:/usr/share/icons/Papirus/32x32/apps/:/usr/share/icons/Papirus-Dark/24x24/actions/:/usr/share/icons/Papirus/22x22/panel/:/usr/share/icons/Papirus/32x32/devices/:/usr/share/icons/Papirus-Dark/symbolic/actions/
 
     ### History ###
 
