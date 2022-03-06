@@ -60,6 +60,15 @@ xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
 xterm*termName: xterm-color
 xterm*eightBitInput: false
 
+!=== st ====
+st.font:         JetBrainsMono Nerd Font:style:medium:pixelsize=14
+
+! window padding
+st.borderpx: 0
+
+!- 0.1 to 0.9 = transparency
+st.alpha: 0.8
+
 !=== URxvt ===
 
 URxvt*blurRadius: 20
@@ -67,7 +76,8 @@ URxvt*blurRadius: 20
 ! general settings
 URxvt*saveline:         15000
 URxvt*termName:         rxvt-256color
-URxvt*iso14755:         false
+!URxvt*iso14755:         false
+URxvt.iso14755_52: false
 
 ! appearance
 URxvt*depth:            32
@@ -80,7 +90,8 @@ URxvt*externalBorder:   0
 ! fonts
 URxvt*letterSpace:              -1
 !URxvt.font: xft:JetBrains Mono Medium:size=11
-URxvt.font: xft:MesloLGS NF Regular:size=11
+URxvt.font: xft:MesloLGS NF Regular:size=10
+!URxvt.font: xft:JetBrainsMono Nerd Font:size=11
 ! run :.!fc-list | grep <font-name>
 
 ! macros for clipboard and selection "m"=Alt
