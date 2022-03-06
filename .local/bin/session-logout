@@ -1,38 +1,40 @@
 #!/usr/bin/env bash
 
 
-WMS=(bspwm i3 openbox xfce)
-for i in "${WMS[@]}"; do
-    if [[ "$(wmctrl -m | grep -i name | awk '{print tolower($2)}')" == "$i" ]]; then
-        WM=$i && break
-    elif [[ "$(xprop -root -notype | grep "WM_NAME =" | tr -d '"' | awk '{print tolower($3)}')" == "$i" ]]; then
-        WM=$i && break
-    elif [[ "$(awk '{print tolower($0)}' <<< "$XDG_CURRENT_DESKTOP")" == "$i" ]]; then
-        WM=$i && break
-    fi
-done
+if [[ -z $DISPLAY ]]; then
+	exit
+elif hash xprop >/dev/null 2>&1; then
+	ID="$(xprop -root -notype _NET_SUPPORTING_WM_CHECK)"
+	WM="$(xprop -id "${ID##* }" -notype -len 100 -f _NET_WM_NAME 8t)"
+	WM="${WM/*WM_NAME = }"
+	WM="${WM/\"}"
+	WM="${WM/\"*}"
+	WM="${WM,,}"
+fi
 
-[[ $(pidof lxpolkit) ]] && pkill lxpolkit
-[[ $(pidof lxsession) ]] && pkill lxsession
-
-# Do the logout
-case $WM in
-    xfce)
-        xfce4-session-logout --logout
-        ;;
-    i3)
-        i3-msg exit
-        ;;
-    bspwm)
-        for window_id in $(bspc query -W); do
-            bspc window "$window_id" -c
-        done
-        killall sxhkd
-        bspc quit
-        ;;
-    openbox)
-        openbox --exit
-        ;;
-    *)
-        echo "WM not yet supported.. Exiting" && exit 0
+case "$WM" in
+	i3)
+		i3-msg "exit"
+		;;
+	openbox)
+		openbox --exit
+		;;
+	xfce)
+		xfce4-session-logout --logout
+		;;
+	bspwm)
+		for i in $(bspc query -W); do
+			bspc window "$i" -c
+		done
+		pkill sxhkd
+		bspc quit
+		;;
+	*)
+		if pidof xinit >/dev/null 2>&1; then
+			pkill xinit
+		else
+			pkill -15 -t tty"${XDG_VTNR:-1}" Xorg
+		fi
+		;;
 esac
+
