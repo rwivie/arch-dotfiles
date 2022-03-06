@@ -18,6 +18,10 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+export EDITOR='nano'
+export VISUAL='mousepad'
+export BROWSER="firefox"
+
 
 #=== Test and then source alias definitions.
 if [ -f ~/.aliases ]; then
