@@ -49,6 +49,13 @@ alias killemall='sudo pacman -R $(comm -23 <(pacman -Qq | sort) <((for i in $(pa
 alias pacunlock="sudo rm /var/lib/pacman/db.lck"   # Delete the lock file /var/lib/pacman/db.lck
 alias paclock="sudo touch /var/lib/pacman/db.lck"  # Create the lock file /var/lib/pacman/db.lck
 
+#==== show updated and installed packages
+alias showup="grep upgraded /var/log/pacman.log"
+alias showin="grep installed /var/log/pacman.log"
+alias showoff="grep removed /var/log/pacman.log"
+#alias showall="grep 'upgraded\|installed\|removed' /var/log/pacman.log"
+alias showall="paclog --action=install --action=remove --action=upgrade"
+
 #==== systemd aliases
 alias serv="systemctl --type=service"
 alias servrun="systemctl --type=service --state=running"
@@ -80,7 +87,7 @@ alias sued="sudo -i nano"
 #==== misc aliases
 alias clock="tty-clock -sSctB -C 6"
 alias obxprop='xprop | grep "^_OB_APP"'
-alias ls='ls --color=auto'
+#alias ls='ls --color=auto'
 alias duhist="dunstctl history-pop"
 alias scrot_th="scrot -t 20 -d 5 -c $HOME/Pictures/ScreenShots/`date +%Y-%m-%d_%H:%M:%S`.png"
 
