@@ -18,8 +18,8 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 0
-    lines: 0
+    columns: 140
+    lines: 40
 
   # Window padding (changes require restart)
   #
@@ -83,8 +83,7 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   normal:
-#    family: JetBrains Mono Medium
-     family: MesloLGS NF
+     family: JetBrainsMono Nerd Font
   # Normal (roman) font face
   #normal:
     # Font family
