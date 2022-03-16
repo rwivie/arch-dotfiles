@@ -73,6 +73,8 @@ alias userlogtodayfollow="journalctl _UID=1000 --since today -f"
 
 #==== git home backup
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+#==== for xorg
+alias started="nano ~/.xinitrc"
 
 #==== other aliases
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
