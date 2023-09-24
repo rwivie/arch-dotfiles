@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# ~/.xprofile
+
+# sourced at boot by ~/.xinitrc and display managers like lightdm
+
+# super alone simulates Alt-F1
+ksuperkey -e 'Super_L=Alt_L|F1' &
+ksuperkey -e 'Super_R=Alt_L|F1' &
+
+# dpms: timeout sleep off
+#xset dpms 600 900 1200
+#sleep 10; xset dpms 0 0 600 &
+# turn off system beep
+xset -b
+
+#==== load Xresources
+xrdb merge ~/.Xresources
+
+#==== set refresh rate
+# xrandr -q | grep " connected" | cut -d ' ' -f1
+xrandr --output DP-3 --mode 2560x1440 --rate 144.00
+
+#==== try to set dpi
+#xdpyinfo | grep -B 2 resolution (shows current)
+xrandr --dpi 109
+
+#==== kunst exports
+export KUNST_SIZE="250x250"
+export KUNST_POSITION="+0+0"
+export KUNST_MUSIC_DIR="/home/ron/Music/"
+
+#==== for gnome
+#xautolock -time 10 -locker lock -corners '+-00' -cornerdelay 15 -notify 15 -notifier "notify-send 'Screen will lock in 15 s'" &
+
+#==== check which wm then set _XDG_CURRENT_DESKTOP
+check_desktop.sh &
+#dbus-update-activation-environment --systemd --all &
