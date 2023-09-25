@@ -1,0 +1,18 @@
+# Auth with polkit-gnome:
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec dunst -confg $HOME/.config/dunst/dunstrc_sway
+exec nm-applet --indicator
+exec blueman-applet
+exec sleep 5 && firewall-applet
+	# Sway Fader
+	# exec python3 ~/.config/sway/scripts/swayfader.py 
+exec autotiling
+#exec swayidle timeout 1200 swaylock timeout 1800 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
+exec swayidle timeout 900 swaylock timeout 930 'systemctl suspend' timeout 920 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
+exec steam-runtime -silent %U 2>/dev/null
+exec copyq --start-server
+
+# GTK3 applications take a long time to start
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
