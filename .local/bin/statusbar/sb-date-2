@@ -1,0 +1,11 @@
+#!/bin/sh
+# Displays the current time in HH:MM:SS (AM|PM)
+
+case $BLOCK_BUTTON in
+    1) notify-send "This Month" "$(cal | sed "s/\<$(date +'%e')\>/<b><span color='red'>&<\/span><\/b>/")" && notify-send "Appointments" "$(calcurse -d3)" ;;
+    2) setsid -f "$TERMINAL" -e calcurse ;;
+    3) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+. sb-theme
+display " $(date '+%I:%M:%S %p')"

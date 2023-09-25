@@ -1,0 +1,17 @@
+#!/bin/sh
+case $BLOCK_BUTTON in
+	1) st -c floatterm -g 144x41 -e yay && pkill -RTMIN+1 dwmblocks ;;
+    3) updates=$(checkupdates | awk '{print $1}')
+       if [ -z "$updates" ]; then
+           dunstify "No updates available"
+       else
+           dunstify "Updates Available" "$updates"
+       fi ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+cupd=$(checkupdates | wc -l)
+. sb-theme
+display "  $cupd"
+
+
+

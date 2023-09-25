@@ -1,0 +1,15 @@
+#!/bin/sh
+
+mute="$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')"
+vol="$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/\%//g')"
+
+if [ $mute == yes ]; then
+    printf "^c#8ec07c^婢 ^d^Muted"
+else
+    case ${vol%?} in
+        [6-9]|10) i='' ;;
+           [3-5]) i='墳' ;;
+               *) i=''
+    esac
+    printf "%s%%\n" "^c#689d6a^$i^d^ $vol"
+fi
