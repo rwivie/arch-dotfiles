@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# Set this as Exec in /usr/local/share/wayland-sessions/sway.desktop
+
+export TERMINAL="foot"
+#export BROWSER="flatpak run org.mozilla.firefox"
+#export EDITOR="nvim"
+export XDG_CURRENT_DESKTOP="sway"
+export XDG_SESSION_TYPE="wayland"
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+export MOZ_ENABLE_WAYLAND=1
+export MOZ_WEBRENDER=1
+export MOZ_ACCELERATED=1
+
+#==== kunst exports
+export KUNST_SIZE="250x250"
+export KUNST_POSITION="+0+0"
+export KUNST_MUSIC_DIR="/home/ron/Music/"
+
+#export MOZ_ENABLE_WAYLAND=1
+#export XDG_CURRENT_DESKTOP=sway
+#export XDG_SESSION_TYPE=wayland
+#export WLR_NO_HARDWARE_CURSORS=1
+##export WLR_NO_HARDWARE_CURSORS=0
+#export WLR_RENDERER_ALLOW_SOFTWARE=1
+##export PATH="$HOME/.local/bin:$PATH"
+#export QT_QPA_PLATFORMTHEME=qt5ct
+#export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+sleep 20 && dbus-update-activation-environment --systemd --all &
+playerctld daemon &
+#kitty &
+#conky -c ~/.config/conky/dobbie_np2.conkyrc &
+
+##==== for mpDris2
+## Define the name of the program you want to check and restart
+#program_name="mpDris2"
+
+## Check if the program is running
+#if pgrep -x "$program_name" > /dev/null; then
+#    echo "Stopping $program_name..."
+#    pkill -x "$program_name"
+#    sleep 1 # Give the program some time to terminate gracefully
+#fi
+
+## Start the program
+#echo "Starting $program_name..."
+#mpDris2 &
+
+
+#sway
+sway 2> ~/.sway.log
