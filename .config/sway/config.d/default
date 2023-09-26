@@ -173,7 +173,8 @@
 
 #==== rofi shit
 	bindsym --release Super_L exec rofi_run_sway -d
-	bindsym $mod+x exec rofi_run_sway -l
+	#bindsym $mod+x exec rofi_run_sway -l
+        bindsym $mod+x exec  wlogout -b 6 -m 650 -c 50 -p layer-shell
 
 #==== toggle waybar
 	bindsym $mod+w exec killall -SIGUSR1 waybar
