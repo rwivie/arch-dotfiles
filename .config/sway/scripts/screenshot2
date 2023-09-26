@@ -4,7 +4,7 @@
 
 ## Script to take screenshots with grim, slurp (in Wayland)
 
-iDIR="$HOME/.config/mako/icons/Papirus"
+iDIR="$HOME/.config/sway/scripts/icons/Papirus"
 
 time=`date +%Y-%m-%d-%H-%M-%S`
 dir="`xdg-user-dir PICTURES`/ScreenShots"
