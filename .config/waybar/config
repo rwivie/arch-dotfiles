@@ -19,6 +19,7 @@
         "custom/line",
         "clock",
         "custom/line2",
+        //"custom/pacman"
         "custom/updates"
     ],
 
@@ -27,6 +28,9 @@
         "memory",
         "cpu",
         "custom/hyprpicker",
+        //"custom/recording",
+        "custom/wf-record",
+        "custom/cheat",
         "pulseaudio",
         "pulseaudio#microphone",
         "tray",
@@ -141,6 +145,18 @@
        "exec": "waybar-module-pacman-updates | jq --unbuffered --compact-output"
    },
 
+    "custom/pacman": {
+        //"format": "{} ",
+        "format": "{} 󰮯",
+        "interval": 3600,                     			// every hour
+        //"exec": "(checkupdates;pacman -Qm | aur vercmp) | wc -l",	// # of updates
+        "exec": "(checkupdates;pacman -Qm | yay -Qu) | wc -l",
+        "exec-if": "exit 0",                  			// always run; consider advanced run conditions
+        "on-click": "foot sh -c 'yay; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8,
+        "tooltip": false,
+    },
+
       "mpd": {
         "interval": 2,
         "unknown-tag": "",
@@ -187,8 +203,36 @@
     },
 
     "custom/hyprpicker": {
-        "format":"",
+        "format": "",
         "on-click": "exec hyprpicker -a",
+        "tooltip": false,
+    },
+
+    "custom/recording": {
+	"exec": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh status",
+	"format": "{}",
+	"on-click": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh toggle fullscreen",
+	"on-click-right": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh toggle region",
+	"restart-interval": 1,
+	"return-type": "json",
+	"tooltip": true
+    },
+
+"custom/wf-record": {
+		"format": "{}",
+		"interval": "once",
+		//"exec": "echo ''",
+                "exec": "echo ' '",
+		"tooltip": "false",
+		"exec-if": "pgrep 'wf-recorder'",
+		"on-click": "exec $HOME/.config/waybar/scripts/wf-record.sh",
+		"signal": 8
+	},
+
+    "custom/cheat": {
+        "format": "",
+        /*"on-click": "zenity --text-info --filename=$HOME/.config/sway/cheatsheet.txt --width=800 --height=600",*/
+        "on-click": "$HOME/.config/sway/cheat.sh",
         "tooltip": false,
     },
 
