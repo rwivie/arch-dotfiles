@@ -42,6 +42,12 @@
 	# Reload the configuration file
 	bindsym $mod+Shift+c reload
 
+	# Start a terminal
+	bindsym $mod+Return exec $term
+
+	# Kill focused window
+	bindsym $mod+Shift+q kill
+
 #==== Moving around:
 
 	# Move your focus around
@@ -161,20 +167,10 @@
 	bindsym --whole-window --border $mod+Shift+button4 resize shrink width 5 px or 5 ppt
 	bindsym --whole-window --border $mod+Shift+button5 resize grow width 5 px or 5 ppt
 
-#==== Lock Screen
-	bindsym $mod+f1 exec ~/.config/sway/scripts/lockman.sh
-
-
-	# Start a terminal
-	bindsym $mod+Return exec $term
-
-	# Kill focused window
-	bindsym $mod+Shift+q kill
-
 #==== rofi shit
 	bindsym --release Super_L exec rofi_run_sway -d
 	#bindsym $mod+x exec rofi_run_sway -l
-        bindsym $mod+x exec  wlogout -b 6 -m 650 -c 50 -p layer-shell
+        bindsym $mod+x exec  wlogout -b 5 -m 650 -c 50 -p layer-shell
 
 #==== toggle waybar
 	bindsym $mod+w exec killall -SIGUSR1 waybar
@@ -218,6 +214,11 @@
 
 #==== hyprpicker
 	bindsym $mod+p exec hyprpicker -a
+
+#==== wf-recorder
+        #bindsym Shift+r exec wf-recorder --audio --file=$HOME/Videos/ScreenCapture/`date +%Y-%m-%d_%H:%M:%S`.mp4
+        #bindsym Ctrl+r exec killall wf-recorder --signal SIGINT
+        bindsym Mod1+r exec $HOME/.config/waybar/scripts/wf-record.sh
 
 #==== swayosd 
 	bindsym --release Caps_Lock exec swayosd --caps-lock
