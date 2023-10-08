@@ -12,6 +12,9 @@ export TERMINAL="kitty"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export WTRLOC="Coleman"
 
+#==== for ranger to use only local config
+export RANGER_LOAD_DEFAULT_RC=false
+
 #==== use either mesa's radv or amd's amdvlk
 #AMD_VULKAN_ICD=AMDVLK
 export AMD_VULKAN_ICD=RADV
