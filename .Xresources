@@ -36,15 +36,15 @@ st.font:         JetBrainsMono Nerd Font:style:regular:pixelsize=16
 !- 0.1 to 0.9 = transparency
 !st.alpha: 0.8
 
-!==== everforest
+!==== everforest2 mine
 ! special
 *.foreground:   #d3c6aa
-*.background:   #232a2e
+*.background:   #2b3339
 *.cursorColor:  #d3c6aa
 
 ! black
-*.color0:       #7a8478
-*.color8:       #7a8478
+*.color0:       #2b3339
+*.color8:       #2b3339
 
 ! red
 *.color1:       #e67e80
