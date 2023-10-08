@@ -15,13 +15,13 @@ promptinit
 
 #==== source
 . $HOME/.aliases
-. $HOME/nord-tty
+#. $HOME/nord-tty
 . /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 . /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#==== other
-# Base16 Shell
+##==== other
+## Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
@@ -71,17 +71,33 @@ setprompt() {
     p_host='%F{green}%M%f'
   fi
 
+if test "$TERM" != "linux"
+then
+
   PS1=${(j::Q)${(Z:Cn:):-$'
-    %F{cyan}[%f
+    %F{#e69875}[%f
     %(!.%F{red}%n%f.%F{green}%n%f)
-    %F{cyan}@%f
+    %F{#e69875}@%f
     ${p_host}
-    %F{cyan}][%f
+    %F{#e69875}][%f
     %F{blue}%~%f
-    %F{cyan}]%f
+    %F{#e69875}]%f
     %(!.%F{red}%#%f.%F{green}%#%f)
     " "
   '}}
+else
+    PS1=${(j::Q)${(Z:Cn:):-$'
+    %F{yellow}[%f
+    %(!.%F{red}%n%f.%F{green}%n%f)
+    %F{yellow}@%f
+    ${p_host}
+    %F{yellow}][%f
+    %F{blue}%~%f
+    %F{yellow}]%f
+    %(!.%F{red}%#%f.%F{green}%#%f)
+    " "
+  '}}
+fi
 
   PS2=$'%_>'
   RPROMPT=$'${vcs_info_msg_0_}'
