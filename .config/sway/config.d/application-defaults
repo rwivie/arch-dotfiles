@@ -62,6 +62,7 @@ for_window [class="Sxiv"] resize set 249x249
 for_window [class="Sxiv"] move position 2270 px 1120 px
 for_window [class="Sxiv"] border none
 #for_window [class="Sxiv"] corner_radius 0
+for_window [app_id="zenity"] floating enable
 
 # set floating for window roles
 for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
