@@ -1,0 +1,304 @@
+// Global 
+{
+    "layer": "top",
+    "position": "top",
+    "exclusive": "true",
+    "height": 32,
+    "spacing": 6,
+
+    "modules-left": [
+        "custom/launcher",
+        "hyprland/workspaces",
+        "hyprland/window",
+    ],
+ 
+    "modules-center": [
+        //"custom/weather",
+        "custom/wttrbar",
+        "custom/line",
+        "clock",
+        "custom/line2",
+        //"custom/pacman"
+        "custom/updates"
+    ],
+
+    "modules-right": [
+	"mpd",        
+        "memory",
+        "cpu",
+        "custom/hyprpicker",
+        //"custom/recording",
+        "custom/wf-record",
+        "custom/cheat",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "tray",
+        "custom/notification",
+        "custom/power",
+    ],
+
+    // Modules
+
+    "custom/launcher": {
+        "format":" ",
+        "on-click": "sleep 0.15 && exec nwg-menu -va top -cmd-lock swaylock -cmd-logout hyprctl dispatch exit x -cmd-restart systemctl reboot -cmd-shutdown systemctl -i poweroff -term foot",
+        "tooltip": false,
+    },
+
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "disable-markup" : false,
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "format": "  {icon}  ",
+        "format-icons": {
+            "1": "1: ",
+            "2": "2: ",
+            "3": "3: ",
+            "4": "4: ",
+            "5": "5: ",
+            "6": "6: ",
+            "7": "7: ",
+            "8": "8: ",
+            "9": "9: ",
+            "urgent": "",
+            "default": ""
+        }
+    },
+
+    "hyprland/submap": {
+        "format": "{}",
+        "tooltip": false
+    },
+
+    "hyprland/window": {
+	"format": "{}",
+        "icon": true,
+        "icon-size": 11,
+	"max-length": 120,
+        "rewrite": {
+           "(.*) - Mozilla Firefox": "🌎 $1",
+           "(.*) - vim": " $1",
+           "(.*) - zsh": " [$1]",
+        }
+    },
+
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "~/.config/hypr/waybar/scripts/weather.py -l coleman -u F -w M",
+        "return-type": "json"
+    },
+
+//  wttrbar from https://github.com/bjesus/wttrbar
+    "custom/wttrbar": {
+        "format": "{} °",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "wttrbar --date-format '%m/%d' --location Coleman --fahrenheit --main-indicator temp_F --ampm --hide-conditions",
+        "return-type": "json"
+    },
+
+    "custom/line": {
+        "format": " | ",
+        "tooltip": false,
+    },
+
+    "clock": {
+        "format": "{:%I:%M}  ",
+        "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "year",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "on-click-right": "mode",
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-click-forward": "tz_up",
+                    "on-click-backward": "tz_down",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
+                    }
+    },
+
+    "custom/line2": {
+        "format": " | ",
+        "tooltip": false,
+    },
+
+   "custom/updates": {
+       "format": "{} {icon}",
+       "return-type": "json",
+       "format-icons": {
+           "has-updates": "󱍷",
+           "updated": "󰂪"
+       },
+       "exec-if": "which waybar-module-pacman-updates | jq --unbuffered --compact-output",
+       "exec": "waybar-module-pacman-updates | jq --unbuffered --compact-output"
+   },
+
+    "custom/pacman": {
+        //"format": "{} ",
+        "format": "{} 󰮯",
+        "interval": 3600,                     			// every hour
+        //"exec": "(checkupdates;pacman -Qm | aur vercmp) | wc -l",	// # of updates
+        "exec": "(checkupdates;pacman -Qm | yay -Qu) | wc -l",
+        "exec-if": "exit 0",                  			// always run; consider advanced run conditions
+        "on-click": "sleep 0.15 && foot sh -c 'yay; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8,
+        "tooltip": false,
+    },
+
+      "mpd": {
+        "interval": 2,
+        "unknown-tag": "",
+
+        "format": "{stateIcon} {artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
+        "format-disconnected": " Disconnected",
+        "format-paused": "{stateIcon} {artist} - {title}",
+        "format-stopped": "Stopped ",
+        "state-icons": {
+            "paused": "",
+            "playing": "",
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)",
+		// Commands to execute on events
+        "on-click": "sleep 0.15 && mpc toggle",
+        "on-click-middle": "sleep 0.15 && mpc prev",
+        "on-click-right": "sleep 0.15 && mpc next",
+        "on-update": "",
+        "on-scroll-up": "mpc seek +00:00:01",
+        "on-scroll-down": "mpc seek -00:00:01",
+        "smooth-scrolling-threshold": 1,
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": " {}%", // Icon: memory
+        //"on-click": "xfce4-terminal -e 'htop'", 
+        "on-click": "sleep 0.15 && foot btop",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "cpu": {
+        "interval": 5,
+        "format": " {usage}% ({load})", // Icon: microchip
+        "states": {
+            "warning": 70,
+            "critical": 90,
+        },
+        "on-click": "sleep 0.15 && foot -e 'htop'",
+    },
+
+    "custom/hyprpicker": {
+        "format": "",
+        "on-click": "sleep 0.15 && exec hyprpicker -a",
+        "tooltip": false,
+    },
+
+    "custom/recording": {
+	"exec": "$XDG_CONFIG_HOME/hypr/waybar/scripts/recording.sh status",
+	"format": "{}",
+	"on-click": "sleep 0.15 && $XDG_CONFIG_HOME/hypr/waybar/scripts/recording.sh toggle fullscreen",
+	"on-click-right": "sleep 0.15 && $XDG_CONFIG_HOME/hypr/waybar/scripts/recording.sh toggle region",
+	"restart-interval": 1,
+	"return-type": "json",
+	"tooltip": true
+    },
+
+"custom/wf-record": {
+		"format": "{}",
+		"interval": "once",
+		//"exec": "echo ''",
+                "exec": "echo ' '",
+		"tooltip": "false",
+		"exec-if": "pgrep 'wf-recorder'",
+		"on-click": "sleep 0.15 && exec $HOME/.config/hypr/waybar/scripts/wf-record.sh",
+		"signal": 8
+	},
+
+    "custom/cheat": {
+        "format": "",
+        /*"on-click": "zenity --text-info --filename=$HOME/.config/sway/cheatsheet.txt --width=800 --height=600",*/
+        "on-click": "sleep 0.15 && $HOME/.config/hypr/cheat.sh",
+        "tooltip": false,
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "on-click": "sleep 0.15 && pamixer -t",
+        "on-click-right": "sleep 0.15 && pavucontrol",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "on-click": "sleep 0.15 && pamixer --default-source -t",
+        "on-click-right": "sleep 0.15 && pavucontrol",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing":10,
+     },
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{} {icon}",
+        "format-icons": {
+        "notification": "<span foreground='red'><sup></sup></span>",
+        "none": "",
+        "dnd-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-none": "",
+        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-inhibited-none": ""
+      },
+            "return-type": "json",
+            "exec-if": "which swaync-client",
+            "exec": "swaync-client -swb",
+            "on-click": "sleep 0.15 && swaync-client -t -sw",
+            "on-click-right": "sleep 0.15 && swaync-client -d -sw",
+            "escape": true
+      },
+
+      "custom/power": {
+          "format":"⏻",
+          "on-click": "sleep 0.15 && exec rofi_run_sway -pf",
+          "tooltip": false,
+      },
+}
