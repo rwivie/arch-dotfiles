@@ -48,10 +48,10 @@ fi
 #gnome-shell --wayland
 
 #==== for dwm
-export XDG_SESSION_DESKTOP="dwm"
-export XDG_CURRENT_DESKTOP="dwm"
-export XDG_SESSION_TYPE="x11"
-exec dwmstart.sh
+#export XDG_SESSION_DESKTOP="dwm"
+#export XDG_CURRENT_DESKTOP="dwm"
+#export XDG_SESSION_TYPE="x11"
+#exec dwmstart.sh
 
 #==== for i3 
 #export XDG_SESSION_TYPE="x11"
@@ -59,8 +59,10 @@ exec dwmstart.sh
 #exec i3
 #exec i3 -V -d all &>> "$HOME/.i3.log"
 
+#==== for fvwm3
+export XDG_SESSION_DESKTOP="fvwm"
+export XDG_CURRENT_DESKTOP="fvwm"
+exec fvwmstart.sh
+
 #exec startxfce4
 #exec openbox-session
-#exec fvwmstart.sh
-#exec dk
-#exec jwm
