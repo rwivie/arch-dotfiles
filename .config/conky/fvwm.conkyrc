@@ -1,0 +1,97 @@
+conky.config = {
+
+--Various settings
+background = true,
+cpu_avg_samples = 2,
+diskio_avg_samples = 10,
+double_buffer = true,
+if_up_strictness = 'address',
+net_avg_samples = 2,
+no_buffers = true,
+temperature_unit = 'celsius',
+text_buffer_size = 2048,
+update_interval = 1,
+imlib_cache_size = 0,
+
+--Placement
+alignment = 'top_left',
+gap_x = 20,
+gap_y = 45,
+minimum_height = 200,
+minimum_width = 130,
+maximum_width = 180,
+
+
+--Graphical
+border_inner_margin = 10,
+border_outer_margin = 2,
+border_width = 1,
+default_bar_width = 220,
+default_bar_height = 10,
+default_gauge_height = 25,
+default_gauge_width = 40,
+default_graph_height = 40,
+default_graph_width = 153,
+default_shade_color = '#1c2023',
+default_outline_color = '#1c2023',
+draw_borders = false,
+draw_graph_borders = true,
+draw_shades = true,
+draw_outline = false,
+
+--Textual
+extra_newline = false,
+format_human_readable = true,
+font = 'JetBrainsMono Nerd Font:size=9',
+max_text_width = 0,
+max_user_text = 16384,
+override_utf8_locale = true,
+short_units = true,
+top_name_width = 21,
+top_name_verbose = false,
+uppercase = false,
+use_spacer = 'none',
+use_xft = true,
+xftalpha = 1,
+
+--Windows
+own_window = true,
+own_window_argb_value = 100,
+own_window_argb_visual = false,
+own_window_class = 'Conky',
+own_window_colour = '#2b3339',
+own_window_hints = 'undecorated,below,above,sticky,skip_taskbar,skip_pager',
+own_window_transparent = false,
+own_window_title = 'system_conky',
+own_window_type = 'desktop',
+
+--Colours
+default_color = 'd3c6aa',
+color0 = 'd3c6aa', --text
+color1 = 'd699b6', --purple
+color2 = 'e67e80', --red
+color3 = 'e69875', --orange
+color4 = 'dbbc7f', --yellow
+color5 = 'a7c080', --green
+color6 = '83c092', --aqua
+color7 = '7fbbb3', --blue
+color8 = '9da9a0', --darkwhite
+color9 = '2b3339', --dark1
+
+};
+
+conky.text = [[
+${goto 60}Used${alignr}Size
+${color2}root${goto 60}${fs_used /}${alignr}${fs_size /}
+
+${goto 60}${color1}MEM${alignr}MAX
+${color7}RAM${goto 60}${mem}${alignr}${memmax}
+${color6}Swap${goto 60}${swap}${alignr}${swapmax}
+
+${color3}CPU:${goto 60}Used${alignr}GHz
+${color4}Avg${goto 60}${cpu cpu0}%${alignr}${freq_g}
+#${color2}${hr}
+
+
+${color4}${font Material Design Icons} 󰮯${font}${alignr}${execpi 3600 checkupdates | awk 'END { print (NR == 0 ? "System updated" : NR " package" (NR > 1 ? "s" : "")); }'}
+]];
