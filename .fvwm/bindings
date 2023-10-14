@@ -1,0 +1,144 @@
+#######
+# 5: Mouse and Key bindings
+#
+# Contexts:
+#     R = Root Window                 rrrrrrrrrrrrrrrrrrrrrr
+#     W = Application Window          rIrrrr<---------^rrrrr
+#     F = Frame Corners               rrrrrr[13TTTT642]rrrrr
+#     S = Frame Sides                 rIrrrr[wwwwwwwww]rrrrr
+#     T = Title Bar                   rrrrrr[wwwwwwwww]rrrrr
+#     I = Icon                        rIrrrrv_________>rrrrr
+#                                     rrrrrrrrrrrrrrrrrrrrrr
+#
+#     Numbers are buttons: [1 3 5 7 9  TTTTT  0 8 6 4 2]
+#
+# Modifiers: (A)ny, (C)ontrol, (S)hift, (M)eta, (N)othing
+#
+# Format: Key <X>  <Context> <Modifier> <Action>
+#         Mouse <X> <Context> <Modifier> <Action>
+####################
+
+# Alt-F1 or Menu to load the root menu and Alt-Tab for a WindowList.
+# Ctrl-F1/F2/F3/F4 will switch between the Virtual Desktops.
+# Super_R (windows key) will launch a terminal.
+# Alt-Space to launch dmenu (Note: dmenu must be present in the system)
+#
+# Silent suppresses any errors (such as keyboards with no Menu key).
+Silent Key F1 A M Menu MenuFvwmRoot
+Silent Key Menu A A Menu MenuFvwmRoot
+Silent Key Tab A M WindowList Root c c NoDeskSort, NoGeometry, SelectOnRelease Meta_L
+Silent Key F1 A C GotoDesk 0 0
+Silent Key F2 A C GotoDesk 0 1
+Silent Key F3 A C GotoDesk 0 2
+Silent Key F4 A C GotoDesk 0 3
+Silent Key Super_R A A Exec exec $[infostore.terminal]
+Test (x $[infostore.runcmd]) Silent Key Space A M Exec exec $[infostore.runcmd] $[infostore.runcmdopt]
+
+# Window Buttons: [1 3 5 7 9  TTTTT  0 8 6 4 2]
+#   1 - Open the WindowOps menu.
+#   2 - Close on single click, Destory on double click.
+#   4 - Maximize (right/middle button will only maximize vertical/horizontal)
+#   6 - Iconify (minimize)
+Mouse 1 1 A Menu MenuWindowOps Delete
+Mouse 1 2 A Close
+Mouse 1 4 A Maximize 100 100
+Mouse 2 4 A Maximize 0 100
+Mouse 3 4 A Maximize 100 0
+Mouse 1 6 A Iconify
+
+#   TitleBar: Click to Raise, Move, Double Click to Maximize
+#             Mouse Wheel Up/Down to WindowShade On/Off
+#   Borders: Click to raise, Move to Resize
+#   Root Window: Left Click - Main Menu
+#                Right Click - WindowOps Menu
+#                Middle Click - Window List Menu
+#   Right click TitleBar/Borders for WindowOps Menu
+Mouse 1	T    A RaiseMoveX Move Maximize
+Mouse 1	FS   A RaiseMove Resize
+Mouse 4	T    A WindowShade True
+Mouse 5	T    A WindowShade False
+Mouse 1	R    A Menu MenuFvwmRoot
+Mouse 2 R    A Menu MenuWindowOpsLong
+Mouse 3	R    A WindowList
+Mouse 1	I    A RaiseMoveX Move "Iconify off"
+Mouse 3	T    A Menu MenuWindowOps
+Mouse 3 I    A Menu MenuIconOps
+
+# Shuffle moves a window in a given direction until it hits another window.
+# These bindings will shuffle a window using the arrow keys.
+#    Ctrl-Alt Up_Arrow     - Shuffle window up
+#    Ctrl-Alt Right_Arrow  - Shuffle window right
+#    Ctrl-Alt Down_Arrow   - Shuffle window down
+#    Ctrl-Alt Left_Arrow   - Shuffle window left
+# Holding shift (Ctrl-Alt-Shift) will grow the window in the given direction.
+DestroyFunc ShuffleDir
+AddToFunc   ShuffleDir
++ I Move shuffle layers $[w.layer] $[w.layer] snap windows $0
++ I WarpToWindow 50 50
+
+Key Up      WTSF    CM  ShuffleDir up
+Key Down    WTSF    CM  ShuffleDir down
+Key Left    WTSF    CM  ShuffleDir left
+Key Right   WTSF    CM  ShuffleDir right
+Key Up      WTSF    CSM Maximize True 0 growup
+Key Down    WTSF    CSM Maximize True 0 growdown
+Key Right   WTSF    CSM Maximize True growright 0
+Key Left    WTSF    CSM Maximize True growleft 0
+
+#==== mouse wheel scroll change desktop
+## Destktop keybindings
+Mouse 4     R   A   WheelScroll down
+Mouse 5     R   A   WheelScroll up
+
+## FvwmPager
+#Mouse (FvwmPager)   4   W   A   WheelScroll down
+#Mouse (FvwmPager)   5   W   A   WheelScroll up 
+
+
+#========================
+#====  applications  ====
+#========================
+#Key d A M Exec exec rofi_run -d
+Key d A 4 Exec exec rofi_run -d
+#Key Return A Super_L Exec exec alacritty
+Key Return A 4 Exec exec kitty
+
+#==== i3-volume
+Key XF86AudioRaiseVolume A A Exec exec i3-volume -nPp up 5
+Key XF86AudioLowerVolume A A Exec exec i3-volume -nPp down 5
+Key XF86AudioMute A A Exec exec i3-volume mute -n
+
+#==== Media keys
+Key XF86AudioPlay A A Exec exec playerctl play-pause
+Key XF86AudioNext A A Exec exec playerctl next
+Key XF86AudioPrev A A Exec exec playerctl previous
+Key XF86Tools	  A A Exec exec kitty ncmpcpp
+
+#==== screenshot
+Key Print A A Exec exec ob-screenshot --in5
+ 
+#==== tiling
+# Alt+Shift hjkl to tile left, bottom-right, top-right, full-right respectively 
+Silent Key H        A     MS      Tile 60 100 +0 +0
+Silent Key L        A     MS      Tile 40 100 -0 +0
+Silent Key J        A     MS      Tile 40 40 -0 -0
+Silent Key K        A     MS      Tile 40 60 -0 +0
+
+# Super+C/F/J/H/K/L - center, maximize, move window, etc
+Silent Key C        A     4       AnimatedMove 50-50w 50-50w
+Silent Key F        A     4       Maximize toggle 100 100
+Silent Key H        A     4       AnimatedMove +0 w0px
+Silent Key L        A     4       AnimatedMove -0 w0px
+Silent Key J        A     4       AnimatedMove w0px -0
+Silent Key K        A     4       AnimatedMove w0px +0
+Silent Key H        A     4S      Move w-20px w0px
+Silent Key L        A     4S      Move w20px w0px
+Silent Key J        A     4S      Move w0px w20px
+Silent Key K        A     4S      Move w0px w-20px
+
+# Maximize in direction until we hit another window.
+Silent Key H        A     MC      Maximize growleft 0
+Silent Key L        A     MC      Maximize growright 0
+Silent Key J        A     MC      Maximize 0 growdown
+Silent Key K        A     MC      Maximize 0 growup
+
