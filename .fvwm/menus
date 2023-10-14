@@ -27,16 +27,10 @@ Test (x $[infostore.runcmd]) + "R&un Command%icons/run_arrow.png%" Exec exec $[i
 + " " Title
 + "  FvwmConsole" Module FvwmConsole -terminal xterm -fg #ebdbb2 -bg #282828
 + " " Title
-#+ "$[gt.Re&fresh]%icons/refresh.png%" Refresh
-#+ "$[gt.&Restart]%icons/restart.png%" Restart
-#+ "$[gt.&Quit]%icons/quit.png%" Module FvwmScript FvwmScript-ConfirmQuit
 + "  $[gt.Re&fresh]" Refresh
 + "  $[gt.&Restart]" Restart
 + "  $[gt.&Quit]" Module FvwmScript FvwmScript-ConfirmQuit
-#+ "  $[gt.&exit]" Module FvwmScript FvwmScript-Quit
-#+ "Refresh" Refresh
-#+ "Restart" Restart
-#+ "Quit" Module FvwmScript-ConfirmQuit
+
 
 # Window Operations Menus
 DestroyMenu MenuWindowOps
