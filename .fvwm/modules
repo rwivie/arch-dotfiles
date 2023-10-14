@@ -49,7 +49,7 @@ DestroyModuleConfig FvwmTaskBar: *
 #================
 
 DestroyModuleConfig RightButtons*
-*RightButtons: Geometry 180x464-0+491
+*RightButtons: Geometry 180x464-0+488
 *RightButtons: BoxSize smart
 *RightButtons: Columns 180
 *RightButtons: Rows 464
