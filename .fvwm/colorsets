@@ -1,0 +1,56 @@
+#####################
+####  colorsets  ####
+#####################
+
+#######
+# 3: Colorsets
+#
+# Colorsets can be used to configure the color of the various
+# parts of fvwm such as window decor, menus, modules, etc.
+#
+# Colorset Convention
+#
+#   0 - Default
+#   1 - Inactive Windows
+#   2 - Active Window
+#   3 - Inactive Windows Borders
+#   4 - Active Windows Borders
+#   5 - Menu - Inactive Item
+#   6 - Menu - Active Item
+#   7 - Menu - Grayed Item
+#   8 - Menu - Title
+#   9 - Reserved
+#  10+ Modules
+#      10 - Module Default   (for confirmquit)
+#      11 - Module Hilight
+#      12 - Module ActiveButton (Mouse Hover)
+#      13 - FvwmPager Active Page
+#      14 - FvwmIconMan Iconified Button
+###########
+
+#==== everforest
+Colorset 0  fg #d3c6aa, bg #2b3339, hi, sh, Plain, NoShape
+Colorset 1  fg #9da9a0, bg #2b3339, hi, sh, Plain, NoShape
+Colorset 2  fg #d3c6aa, bg #2b3339, hi, sh, Plain, NoShape
+Colorset 3  fg black, bg #21292f, hi, sh, Plain, NoShape
+Colorset 4  fg black, bg #2b3339, hi #24424f, sh #111f26, Plain, NoShape
+Colorset 5  fg #d3c6aa, bg #2b3339, hi #2b3339, sh #2b3339, Plain, NoShape
+Colorset 6  fg #d699b6, bg #445055, hi #2b3339, sh #2b3339, Plain, NoShape
+Colorset 7  fg #928374, bg #2b3339, hi, sh, Plain, NoShape
+Colorset 8  fg #d3c6aa, bg #2b3339, hi #2b3339, sh #2b3339, Plain, NoShape
+Colorset 10 fg #d3c6aa, bg #2b3339, hi #21292f, sh #21292f, Plain, NoShape
+Colorset 11 fg #d3c6aa, bg #7a8478, hi #7c6f64, sh #7c6f64, Plain, NoShape
+Colorset 12 fg #e7dabe, bg #7a8478, hi, sh, Plain, NoShape
+#Colorset 13 fg #d3c6aa, bg #d65d0e, hi #d3c6aa, sh #d3c6aa, Plain, NoShape
+Colorset 13 fg #d3c6aa, bg #83a598, hi #d3c6aa, sh #d3c6aa, Plain, NoShape
+Colorset 14 fg #d3c6aa, bg #2b3339, hi #445055, sh #9da9a0, Plain, NoShape
+Colorset 15 fg #d3c6aa, bg #458588, hi #21292f, sh #9da9a0, Plain, NoShape
+Colorset 16 fg #d3c6aa, bg #928374, hi #7c6f64, sh #7c6f64, Plain, NoShape
+Colorset 17 fg #d3c6aa, bg #83a598, hi #d3c6aa, sh #d3c6aa, Plain, NoShape
+Colorset 18 fg #d3c6aa, bg #7a8478, hi #2b3339, sh #2b3339, Plain, NoShape
+Colorset 19 fg #d3c6aa, bg #e69875, hi #689d6a, sh #689d6a, Plain, NoShape
+Colorset 20 fg #d3c6aa, bg #7a8478, hi #7c6f64, sh #7c6f64, Plain, NoShape
+Colorset 21 fg #e7dabe, bg #928374, hi, sh, Plain, NoShape
+
+#   for fvwmpager rightbuttons
+Colorset 103 fg #5e81ac, bg #81a1c1, hi, sh, Plain, NoShape
