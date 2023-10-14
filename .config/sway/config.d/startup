@@ -10,7 +10,7 @@ exec sleep 5 && firewall-applet
 exec autotiling
 exec swayidle timeout 900 swaylock timeout 930 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
 #exec swayidle timeout 900 swaylock timeout 930 'systemctl suspend' timeout 920 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
-#exec waycorner
+exec waycorner
 #exec steam-runtime -silent %U 2>/dev/null
 exec copyq --start-server
 
