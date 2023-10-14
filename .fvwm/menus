@@ -1,0 +1,116 @@
+#################
+####  Menus  ####
+#################
+
+MenuStyle * MenuColorset 5, ActiveColorset 6, GreyedColorset 7, TitleColorset 8
+MenuStyle * Hilight3DOff, HilightBack, HilightTitleBack, SeparatorsLong
+MenuStyle * TrianglesSolid, TrianglesUseFore
+MenuStyle * ItemFormat "%|%3.1i%5.3l%5l%5r%5.3>%|"
+MenuStyle * Font "xft:JetBrainsMono Nerd Font:Regular:size=12:antialias=True"
+MenuStyle * PopupOffset 10 
+MenuStyle * BorderWidth 6
+MenuStyle * VerticalItemSpacing 4 4
+
+# Root Menu
+DestroyMenu MenuFvwmRoot
+AddToMenu   MenuFvwmRoot " :wickedlester: " Title
++ " " Title
+Test (x $[infostore.runcmd]) + "R&un Command%icons/run_arrow.png%" Exec exec $[infostore.runcmd] $[infostore.runcmdopt]
++ "  Run" Exec exec $[infostore.runcmd]
+#+ "Fvwm&Console" Module FvwmConsole -terminal xterm -fg #ebdbb2 -bg #282828
++ "  Terminal" Exec exec $[infostore.terminal]
++ "  Files" Exec exec thunar
++ "  Browser" Exec exec firefox
++ "  Screenshot" Exec exec ob-screenshot --in5
++ "  picom" Exec exec isrunning-compton --toggle
+#+ " " Nop
++ " " Title
++ "  FvwmConsole" Module FvwmConsole -terminal xterm -fg #ebdbb2 -bg #282828
++ " " Title
+#+ "$[gt.Re&fresh]%icons/refresh.png%" Refresh
+#+ "$[gt.&Restart]%icons/restart.png%" Restart
+#+ "$[gt.&Quit]%icons/quit.png%" Module FvwmScript FvwmScript-ConfirmQuit
++ "  $[gt.Re&fresh]" Refresh
++ "  $[gt.&Restart]" Restart
++ "  $[gt.&Quit]" Module FvwmScript FvwmScript-ConfirmQuit
+#+ "  $[gt.&exit]" Module FvwmScript FvwmScript-Quit
+#+ "Refresh" Refresh
+#+ "Restart" Restart
+#+ "Quit" Module FvwmScript-ConfirmQuit
+
+# Window Operations Menus
+DestroyMenu MenuWindowOps
+AddToMenu   MenuWindowOps
++ "$[gt.Move]"      Move
++ "$[gt.Resize]"    Resize
++ "$[gt.(De)Iconify]"   Iconify
++ "$[gt.(Un)Maximize]"  Maximize
++ "$[gt.(Un)Shade]"     WindowShade
++ "$[gt.(Un)Stick]"     Stick
++ " " Nop
++ "$[gt.Close]"     Close
++ "$[gt.More]..."   Menu MenuWindowOpsLong This 0 0
+
+DestroyMenu MenuWindowOpsLong
+AddToMenu   MenuWindowOpsLong "$[gt.Window Ops]" Title
++ "$[gt.Move]%icons/win/move.png%" Move
++ "$[gt.Resize]%icons/win/resize.png%" Resize
++ "$[gt.(De)Iconify]%icons/win/iconify.png%" Iconify
++ "$[gt.(Un)Maximize]%icons/win/max.png%" Maximize
++ "$[gt.(Un)Shade]%icons/win/shade.png%" WindowShade
++ "$[gt.(Un)Sticky]%icons/win/sticky.png%" Stick
++ "$[gt.(No)Title Bar]%icons/win/title.png%" Pick (CirculateHit) ToggleTitle
++ "$[gt.Send To]%icons/win/sendto.png%" Popup MenuSendTo
++ "" Nop
++ "$[gt.Close]%icons/win/close.png%" Close
++ "$[gt.Destroy]%icons/win/destroy.png%" Destroy
++ "" Nop
++ "$[gt.Raise]%icons/win/raise.png%" Raise
++ "$[gt.Lower]%icons/win/lower.png%" Lower
++ "" Nop
++ "$[gt.Stays On Top]%icons/win/top.png%" Pick (CirculateHit) Layer 0 6
++ "$[gt.Stays Put]%icons/win/stays.png%" Pick (CirculateHit) Layer 0 4
++ "$[gt.Stays On Bottom]%icons/win/bottom.png%" Pick (CirculateHit) Layer 0 2
++ "" Nop
++ "$[gt.Identify]%icons/info.png%" Module FvwmIdent
+
+DestroyMenu MenuIconOps
+AddToMenu   MenuIconOps
++ "$[gt.(De)Iconify]%icons/win/iconify.png%"	Iconify
++ "$[gt.(Un)Maximize]%icons/win/max.png%" 	Maximize
++ "$[gt.(Un)Shade]%icons/win/shade.png%"	WindowShade
++ "$[gt.(Un)Sticky]%icons/win/sticky.png%"	Stick
++ "$[gt.(No)TitleBar]%icons/win/title.png%"	Pick (CirculateHit) ToggleTitle
++ "$[gt.Send To]%icons/win/sendto.png%" 	Popup MenuSendTo
++ "" Nop
++ "$[gt.Close]%icons/win/close.png%"		Close
++ "$[gt.Destroy]%icons/win/destroy.png%"	Destroy
++ "" Nop
++ "$[gt.Raise]%icons/win/raise.png%"		Raise
++ "$[gt.Lower]%icons/win/lower.png%"		Lower
++ "" Nop
++ "$[gt.Stays On Top]%icons/win/top.png%"       Pick (CirculateHit) Layer 0 6
++ "$[gt.Stays Put]%icons/win/stays.png%"       Pick (CirculateHit) Layer 0 4
++ "$[gt.Stays On Bottom]%icons/win/bottom.png%" Pick (CirculateHit) Layer 0 2
++ "" Nop
++ "$[gt.Identify]%icons/info.png%"            Module FvwmIdent
+
+DestroyMenu MenuSendTo
+AddToMenu MenuSendTo
++ "$[gt.Current]" MoveToCurrent
++ "$[gt.Page]" PopUp MenuSendToPage
++ "$[gt.Desk]" PopUp MenuSendToDesk
+
+DestroyMenu MenuSendToDesk
+AddToMenu   MenuSendToDesk
++ "$[gt.Desk] 0"	MoveToDesk 0 0
++ "$[gt.Desk] 1"	MoveToDesk 0 1
++ "$[gt.Desk] 2"	MoveToDesk 0 2
++ "$[gt.Desk] 3"	MoveToDesk 0 3
+
+DestroyMenu MenuSendToPage
+AddToMenu   MenuSendToPage
++ "$[gt.Page] (0,0)"	MoveToPage 0 0
++ "$[gt.Page] (0,1)"	MoveToPage 0 1
++ "$[gt.Page] (1,0)"	MoveToPage 1 0
++ "$[gt.Page] (1,1)"	MoveToPage 1 1
