@@ -51,7 +51,7 @@ DestroyFunc StartFunction
 AddToFunc   StartFunction
 + I Module FvwmButtons RightButtons
 + I Module FvwmButtons Dock
-#+ I Module FvwmDebug -l /home/ron/.fvwm/log
++ I Module FvwmDebug -l /home/ron/.fvwm/log
 + I Module FvwmButtons FvwmTaskBar
 + I Module FvwmEvent EventNewDesk
 #Module FvwmConsole
