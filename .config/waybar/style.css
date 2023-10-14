@@ -86,6 +86,7 @@ button {
 #custom-hyprpicker,
 #custom-wf-record,
 #custom-cheat,
+#custom-bluetooth-battery,
 #pulseaudio,
 #pulseaudio#microphone,
 #tray,
@@ -267,6 +268,12 @@ tooltip label {
     font-size:15px;
     /*padding-left: 10px;
     padding-right: 10px;*/
+}
+
+#custom-bluetooth-battery {
+    color: #7fbbb3;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #pulseaudio {
