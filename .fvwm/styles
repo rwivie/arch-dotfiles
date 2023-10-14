@@ -106,7 +106,7 @@ Style Dock !Title, !Borders, !Handles, Sticky, \
 #Style "*Firefox*" StartsOnDesk 0
 #Style discord StartsOnPage 0 1 1, SkipMapping
 #Style "Discord Updater" StartsOnPage 0 1 1, SkipMapping
-Style Steam StartsOnPage 0 1 1
+#Style Steam StartsOnPage 0 1 1
 #Style "*Firefox*" MinWindowSize 1890p 1160p
 #Style "*Firefox*" PositionPlacement 20 -30
 
@@ -138,7 +138,10 @@ Style Hexchat EWMHMiniIconOverride, MiniIcon io.github.Hexchat.svg:18x18
 style Thunar StartsOnPage 0 0
 style firefox StartsOnPage 0 1
 style Steam StartOnPage 2 0
-style discord StartOnDeskAndPage 1 0 0
+#style discord StartOnDesk 1
+Style Discord StartsOnPage 1 1 0
+Style Steam StartsOnDesk 2
+Style Steam StartsOnPage 0 0
 
 #==== app styles
 Style gsimplecal !Title, PositionPlacement UnderMouse
