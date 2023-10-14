@@ -40,7 +40,7 @@ Colorset 7  fg #928374, bg #2b3339, hi, sh, Plain, NoShape
 Colorset 8  fg #d3c6aa, bg #2b3339, hi #2b3339, sh #2b3339, Plain, NoShape
 Colorset 10 fg #d3c6aa, bg #2b3339, hi #21292f, sh #21292f, Plain, NoShape
 Colorset 11 fg #d3c6aa, bg #7a8478, hi #7c6f64, sh #7c6f64, Plain, NoShape
-Colorset 12 fg #e7dabe, bg #7a8478, hi, sh, Plain, NoShape
+Colorset 12 fg #a7c080, bg #445055, hi, sh, Plain, NoShape
 #Colorset 13 fg #d3c6aa, bg #d65d0e, hi #d3c6aa, sh #d3c6aa, Plain, NoShape
 Colorset 13 fg #d3c6aa, bg #83a598, hi #d3c6aa, sh #d3c6aa, Plain, NoShape
 Colorset 14 fg #d3c6aa, bg #2b3339, hi #445055, sh #9da9a0, Plain, NoShape
