@@ -1,0 +1,65 @@
+########################################################
+####                                                ####
+####  ███████╗██╗   ██╗██╗    ██╗███╗   ███╗        ####
+####  ██╔════╝██║   ██║██║    ██║████╗ ████║        ####
+####  █████╗  ██║   ██║██║ █╗ ██║██╔████╔██║        ####
+####  ██╔══╝  ╚██╗ ██╔╝██║███╗██║██║╚██╔╝██║        ####
+####  ██║      ╚████╔╝ ╚███╔███╔╝██║ ╚═╝ ██║        ####
+####  ╚═╝       ╚═══╝   ╚══╝╚══╝ ╚═╝     ╚═╝config  ####
+########################################################
+
+#==================================
+#====  Archlinux Fvwm3 Config  ====
+#==================================
+
+#==============================
+#==== infostore variables  ====
+#==============================
+InfoStoreAdd runcmd "rofi -show run -theme dmenu"
+InfoStoreAdd terminal kitty
+InfoStoreAdd music_player "Exec exec kitty ncmpcpp"
+
+ImagePath $[FVWM_USERDIR]/images:+:$[FVWM_USERDIR]/images/icons
+
+#==== for MpdButtons
+SetEnv fvwm_script $[FVWM_USERDIR]/scripts
+SetEnv fvwm_music_path /home/ron/Music
+
+#==============================
+Read bindings
+Read menus
+Read styles
+Read colorsets
+Read ef_decor
+Read functions
+Read modules
+
+DesktopConfiguration global
+BugOpts ExplainWindowPlacement On
+
+#=====================
+#====  functions  ====
+#=====================
+# Start Function
+#
+# The start function is run right after fvwm is done reading
+# the config file. This function run after each restart
+# so using Test (Init) or Test (Restart) can further control
+# actions that are run during the first time run (Init) or
+# actions that are run after a restart.
+DestroyFunc StartFunction
+AddToFunc   StartFunction
++ I Module FvwmButtons RightButtons
++ I Module FvwmButtons Dock
+#+ I Module FvwmDebug -l /home/ron/.fvwm/log
++ I Module FvwmButtons FvwmTaskBar
++ I Module FvwmEvent EventNewDesk
+#Module FvwmConsole
+
+# Local configuration file. For use with the default-config.
+#
+# If $FVWMUSER_DIR/local.config ($HOME/.fvwm/local.config by default)
+# exists, then read it. This allows changes to default-config settings
+# without needing a full copy of the default-config. This will also allow
+# default-config changes to get used after upgrades (if applicable).
+Test (f $[FVWM_USERDIR]/local.config) Read $[FVWM_USERDIR]/local.config
