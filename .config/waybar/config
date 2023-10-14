@@ -31,6 +31,7 @@
         //"custom/recording",
         "custom/wf-record",
         "custom/cheat",
+	//"custom/bluetooth-battery",
         "pulseaudio",
         "pulseaudio#microphone",
         "tray",
@@ -235,6 +236,15 @@
         "on-click": "$HOME/.config/sway/cheat.sh",
         "tooltip": false,
     },
+
+  "custom/bluetooth-battery": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 5,
+    "exec": "~/.config/waybar/scripts/bluetooth-battery-bluetooth-module.sh",
+    "exec-if": "~/.config/waybar/scripts/bluetooth_battery_status.sh >/dev/null 2>&1",
+    "signal": 9
+  },
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
