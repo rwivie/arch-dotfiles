@@ -39,6 +39,9 @@ assign [class="heroic"] 6
 for_window [class="discord"] focus
 assign [class="discord"] 8
 
+for_window [class="teams-for-linux"] focus
+assign [class="teams-for-linux"] 8
+
 #"gsimplecal"
 for_window [app_id="gsimplecal"] border none
 
