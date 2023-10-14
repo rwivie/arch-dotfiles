@@ -1,0 +1,150 @@
+#################
+#####  Modules  ######
+#################
+
+#================
+#====  FvwmIdent  ====
+#================
+
+DestroyModuleConfig FvwmIdent:*
+*FvwmIdent: Colorset 10
+*FvwmIdent: Font "xft:Sans:size=10:antialias=True"
+
+#================
+#====  FvwmScript  ====
+#================
+
+DestroyModuleConfig FvwmScript:*
+*FvwmScript: DefaultColorset 10
+
+#=================
+#====  fvwmbuttons  ====
+#=================
+#====  taskbar  ==== -0+0 top right +0+0 top left +0-0 bottom left -0-0 bottom right
+
+DestroyModuleConfig FvwmTaskBar: *
+*FvwmTaskBar: Geometry 2560x30+0+0
+*FvwmTaskBar: Colorset 10
+*FvwmTaskBar: Frame 0
+*FvwmTaskBar: Font "xft:JetBrainsMono Nerd Font:size=10:bold:antialias=True"
+*FvwmTaskBar: Rows 10
+*FvwmTaskBar: Columns 2560
+*FvwmTaskBar: (26x10, Icon "arch_22.png", Right, Action `Exec jgmenu --config-file="$HOME/.config/jgmenu/jgmenu-fvwmrc"`, Frame 0)
+*FvwmTaskBar: (5x10, Frame 0)
+*FvwmTaskBar: (2294x4, Left, Swallow TaskBarIcons 'Module FvwmIconMan \
+               TaskBarIcons' Frame 0)
+*FvwmTaskBar: (120x10, Swallow(NoClose, UseOld) stalonetray \
+               'Exec exec stalonetray -c ~/.stalonetrayrc_fvwm', Frame 0)
+*FvwmTaskBar: (5x10, Frame 0)
+*FvwmTaskBar: (55x10, Swallow DateTime 'Module FvwmScript FvwmScript-DateTime', \
+               Frame 0)
+*FvwmTaskBar: (5x10, Frame 0)
+*FvwmTaskBar: (25x10, Icon "dashboard-show.png" , \
+               Action(Mouse 1) ToggleRightButtons Id panel_control_button)
+*FvwmTaskBar: (25x10, Icon "power_ef.png", \
+               Action(Mouse 1) "Exec exec rofi_run -pf")
+
+#================
+#==== rightbuttons  ====
+#================
+
+DestroyModuleConfig RightButtons*
+*RightButtons: Geometry 180x464-0+491
+*RightButtons: BoxSize smart
+*RightButtons: Columns 180
+*RightButtons: Rows 464
+*RightButtons: Colorset 10
+*RightButtons: (180x56, Center, Icon "arch_logo3.png", \
+		Action(Mouse 1) ToggleDock Id panel_control_button2)
+*RightButtons: (40x20, Frame 0)
+*RightButtons: (25x20, Id desk0, Title "0", Action (Mouse 1) GotoDesk 0 0, Colorset 20, ActiveColorset 21, Frame 0)
+*RightButtons: (25x20, Id desk1, Title "1", Action (Mouse 1) GotoDesk 0 1, ActiveColorset 12, Frame 0)
+*RightButtons: (25x20, Id desk2, Title "2", Action (Mouse 1) GotoDesk 0 2, ActiveColorset 12, Frame 0)
+*RightButtons: (25x20, Id desk3, Title "3", Action (Mouse 1) GotoDesk 0 3, ActiveColorset 12, Frame 0)
+*RightButtons: (40x20, Frame 0)
+*RightButtons: (180x118, Center, Swallow FvwmPager "Module FvwmPager *", Frame 0, Padding 2 4)
+*RightButtons: (180x270, Center, Colorset 10, \
+								Swallow (SwallowNew) "Conky" "Exec exec conky -c $HOME/.config/conky/fvwm.conkyrc"), \
+								Frame 0, Padding 2 2)
+
+#============
+#====  dock  ====
+#============
+ 
+DestroyModuleConfig Dock: *
+*Dock: Geometry 240x60+1160-0
+*Dock: Columns 4
+*Dock: Rows 1
+*Dock: Colorset 10
+*Dock: Frame 0
+*Dock: (1x1, Icon "dock/kitty48.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec kitty")
+*Dock: (1x1, Icon "dock/thunar48.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec thunar")
+*Dock: (1x1, Icon "dock/firefox48.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec firefox")
+*Dock: (1x1, Icon "dock/mpdevil48.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec mpdevil")
+
+#==================
+#====  fvwmiconman  ====
+#==================  
+
+DestroyModuleConfig TaskBarIcons: *
+*TaskBarIcons: IconName TaskBarIcons
+*TaskBarIcons: Title ""
+*TaskBarIcons: UseWinList true
+*TaskBarIcons: Resolution global
+*TaskBarIcons: Tips needed
+*TaskBarIcons: Font "xft:JetBrainsMono Nerd Font:size=10:antialias=True"
+
+## Manager Size
+*TaskBarIcons: ButtonGeometry 180x30
+*TaskBarIcons: MaxButtonWidth 180
+*TaskBarIcons: ManagerGeometry 1x1
+
+# Button Styles
+*TaskBarIcons: DrawIcons always
+*TaskBarIcons: ReliefThickness 0
+*TaskBarIcons: Format "%t"
+*TaskBarIcons: IconButton flat
+*TaskBarIcons: IconAndSelectButton flat
+*TaskBarIcons: SelectButton flat
+*TaskBarIcons: Colorset 14
+*TaskBarIcons: FocusColorset 12
+*TaskBarIcons: IconColorset 14
+*TaskBarIcons: FocusAndSelectColorset 12
+*TaskBarIcons: SelectColorset 12
+*TaskBarIcons: IconAndSelectColorset 12
+
+# Button Actions
+*TaskBarIcons: Action Mouse 1 A sendcommand IconManClick
+*TaskBarIcons: Action Mouse 2 A sendcommand Nop
+*TaskBarIcons: Action Mouse 3 A sendcommand "Menu MenuIconOps Mouse 0 o100"
+
+#================
+#====  fvwmpager  ====
+#================
+
+DestroyModuleConfig FvwmPager:*
+*FvwmPager: Geometry 150x118
+*FvwmPager: Colorset * 15
+*FvwmPager: HilightColorset * 17
+*FvwmPager: BalloonColorset * 15
+*FvwmPager: WindowColorsets 18 19
+*FvwmPager: Font "xft:JetBrainsMono Nerd Font:size=11
+*FvwmPager: Balloons All
+*FvwmPager: BalloonFont "xft:Sans:Bold:size=8:antialias=True"
+*FvwmPager: BallonYOffset +2
+*FvwmPager: Window3dBorders
+*FvwmPager: WindowBorderWidth 1
+*FvwmPager: SolidSeparators
+*FvwmPager: UseSkipList
+
+#================
+#====  FvwmEvent  ====
+#================
+
+DestroyModuleConfig EventNewDesk:*
+*EventNewDesk: PassID
+*EventNewDesk: new_desk ChangeDesk
