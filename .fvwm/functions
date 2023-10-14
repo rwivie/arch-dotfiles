@@ -1,0 +1,131 @@
+###########
+# 1: Functions
+#
+# Fvwm can use custom functions for various tasks.
+# The syntax for defining a function named FunctionName is:
+#
+#   DestroyFunc FunctionName
+#   AddToFunc FunctionName
+#   + I [Action to do Immediately]
+#   + C [Action to do on a Mouse Click]
+#   + D [Action to do on a Mouse Double Click]
+#   + H [Action to do on a Mouse Hold]
+#   + M [Action to do on a Mouse Motion]
+###########
+
+# Mouse Bindings Functions
+DestroyFunc RaiseMoveX
+AddToFunc RaiseMoveX
++ I Raise
++ M $0
++ D $1
+
+DestroyFunc RaiseMove
+AddToFunc RaiseMove
++ I Raise
++ M $0
+
+DestroyFunc MoveToCurrent
+AddToFunc MoveToCurrent
++ I ThisWindow MoveToPage
++ I ThisWindow MoveToDesk
+
+# Function: IconManClick
+#
+# This function is run from FvwmIconMan when the button is clicked.
+DestroyFunc IconManClick
+AddToFunc   IconManClick
++ I ThisWindow (Raised, !Shaded, !Iconic, CurrentPage) Iconify
++ I TestRc (Match) Break
++ I ThisWindow WindowShade off
++ I ThisWindow Iconify off
++ I ThisWindow Raise
++ I ThisWindow (AcceptsFocus) FlipFocus
+
+# Function: ToggleTitle
+#
+# This function will toggle if fvwm shows the TitleBar.
+DestroyFunc ToggleTitle
+AddToFunc   ToggleTitle
++ I ThisWindow (HasTitle) WindowStyle !Title
++ I TestRc (NoMatch) WindowStyle Title
+
+# Function: ChangeDesk
+#
+# This function is called by FvwmEvent every time the Desk is changed.
+DestroyFunc ChangeDesk
+AddToFunc   ChangeDesk
++ I SendToModule FvwmButtons ChangeButton desk0 Colorset 10
++ I SendToModule FvwmButtons ChangeButton desk1 Colorset 10
++ I SendToModule FvwmButtons ChangeButton desk2 Colorset 10
++ I SendToModule FvwmButtons ChangeButton desk3 Colorset 10
++ I SendToModule FvwmButtons ChangeButton desk$0 Colorset 11
+
+#==== runcommand
+DestroyModuleConfig  FvwmForm-RunCommand: *
+*FvwmForm-RunCommand: WarpPointer
+*FvwmForm-RunCommand: Title         "$[gt.Run Command]"
+*FvwmForm-RunCommand: Line          center
+*FvwmForm-RunCommand: Text          "$[gt.Run Command]"
+*FvwmForm-RunCommand: Line          left
+*FvwmForm-RunCommand: Text          "$[gt.Command:]"
+*FvwmForm-RunCommand: Input         Command 30 ""
+*FvwmForm-RunCommand: Line          center
+*FvwmForm-RunCommand: Selection     cmd multiple
+*FvwmForm-RunCommand: Choice        TERM    TERM     off      "$[gt.Run in Terminal]"
+*FvwmForm-RunCommand: Line          expand
+*FvwmForm-RunCommand: Button        quit "$[gt.Execute]"
+*FvwmForm-RunCommand: Command       $(TERM?exec xterm -hold -T "$(Command)" -n "$(Command)" -e $(Command))
+*FvwmForm-RunCommand: Command       exec $(Command)
+*FvwmForm-RunCommand: Button        quit "$[gt.Cancel]"
+*FvwmForm-RunCommand: Command       Nop
+
+#==== mouse wheel scroll desktop
+
+## Change Desktop by Scroll
+DestroyFunc WheelScroll
+AddToFunc WheelScroll I PipeRead 'case $0 in \
+                up) test $[page.ny] -eq $$(($[desk.pagesy]-1)) -a $[page.nx] -lt $$(($[desk.pagesx]-1)) \
+                        && echo GotoPage +1p 0 \
+                        || echo GotoPage 0p +1p;; \
+                down) test $[page.ny] -eq 0 -a $[page.nx] -gt 0 \
+                        && echo GotoPage -1p $$(($[desk.pagesy]-1)) \
+                        || echo GotoPage 0p -1p;; \
+                esac' 
+
+AddToFunc ToggleWindow
++ I None ($$0, CirculateHit) $$1
++ I TestRc (Match) Break
++ I Next (currentpage, visible, !iconic, $$0, CirculateHit) Close
++ I TestRc (Match) Break
++ I Next ($$0, CirculateHit) Function MakeVisible
+
+AddToFunc MakeVisible
++ I MoveToDesk
++ I MoveToPage
++ I MoveToScreen
++ I Raise
++ I Iconify off
++ I WindowShade off
+
+AddToFunc ToggleRightButtons
++ I ToggleWindow RightButtons "Module FvwmButtons RightButtons"
+
+AddToFunc ToggleDock
++ I ToggleWindow Dock "Module FvwmButtons Dock"
+
+AddToFunc ToggleRightMPDButtons
++ I ToggleWindow RightMPDButtons "Module FvwmButtons RightMPDButtons"
+
+#==== tiling
+# Function used for tiling/un-tiling windows.
+DestroyFunc Tile
+AddToFunc Tile
++ I ThisWindow (Maximized) Maximize toggle
++ I TestRc (Match) Break
++ I Maximize Forget
++ I Raise
++ I Maximize $0 $1
++ I Move $2 $3
++ I Focus
+
