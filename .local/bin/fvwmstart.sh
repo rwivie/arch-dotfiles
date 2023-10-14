@@ -14,5 +14,5 @@ firewall-applet &
 picom --config ~/.config/picom/picom_fvwm.conf --daemon &
 (sleep 1; xautolock -time 10 -locker lock -corners '+-00' -cornerdelay 15 -notify 15 -notifier "notify-send 'Screen will lock in 15 s'") &
 
-exec /usr/bin/fvwm3
+exec /usr/bin/fvwm3 2> ~/.fvwm.log
 
