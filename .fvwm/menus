@@ -25,12 +25,23 @@ Test (x $[infostore.runcmd]) + "R&un Command%icons/run_arrow.png%" Exec exec $[i
 + "  picom" Exec exec isrunning-compton --toggle
 #+ " " Nop
 + " " Title
++ " Music"	Popup FvwmMenuMPD
++ " " Title
 + "  FvwmConsole" Module FvwmConsole -terminal xterm -fg #ebdbb2 -bg #282828
 + " " Title
 + "  $[gt.Re&fresh]" Refresh
 + "  $[gt.&Restart]" Restart
 + "  $[gt.&Quit]" Module FvwmScript FvwmScript-ConfirmQuit
 
+
+#====================
+#==== Pipe Menus ====
+#====================
+DestroyMenu FvwmMenuMPD
+AddToMenu FvwmMenuMPD
++ DynamicPopupAction Piperead '$[fvwm_script]/fvwm-menu-mpd'
+
+#=========================
 
 # Window Operations Menus
 DestroyMenu MenuWindowOps
