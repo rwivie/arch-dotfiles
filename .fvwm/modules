@@ -40,7 +40,7 @@ DestroyModuleConfig FvwmTaskBar: *
                Frame 0)
 *FvwmTaskBar: (5x10, Frame 0)
 *FvwmTaskBar: (25x10, Icon "dashboard-show.png" , \
-               Action(Mouse 1) ToggleRightButtons Id panel_control_button)
+               Action(Mouse 1) ToggleRightButtons2 Id panel_control_button)
 *FvwmTaskBar: (25x10, Icon "power_ef.png", \
                Action(Mouse 1) "Exec exec rofi_run -pf")
 
@@ -49,7 +49,7 @@ DestroyModuleConfig FvwmTaskBar: *
 #================
 
 DestroyModuleConfig RightButtons*
-*RightButtons: Geometry 180x464-0+488
+*RightButtons: Geometry 180x456-0+492
 *RightButtons: BoxSize smart
 *RightButtons: Columns 180
 *RightButtons: Rows 464
@@ -63,8 +63,70 @@ DestroyModuleConfig RightButtons*
 *RightButtons: (25x20, Id desk3, Title "3", Action (Mouse 1) GotoDesk 0 3, ActiveColorset 12, Frame 0)
 *RightButtons: (40x20, Frame 0)
 *RightButtons: (180x118, Center, Swallow FvwmPager "Module FvwmPager *", Frame 0, Padding 2 4)
-*RightButtons: (180x270, Center, Colorset 10, \
+*RightButtons: (180x240, Center, Colorset 10, \
 								Swallow (SwallowNew) "Conky" "Exec exec conky -c $HOME/.config/conky/fvwm.conkyrc"), \
+								Frame 0, Padding 2 2)
+
+#==========================
+#==== rightbuttons ext ==== 3 48x48 + 3 48x48 pad each side 6
+#==========================
+
+DestroyModuleConfig RightButtons2*
+*RightButtons2: Geometry 180x826-0+307
+*RightButtons2: BoxSize smart
+*RightButtons2: Columns 180
+*RightButtons2: Rows 906
+*RightButtons2: Padding 4 4
+*RightButtons2: Colorset 10
+*RightButtons2: (180x56, Center, Icon "arch_logo3.png", \
+		Action(Mouse 1) ToggleDock Id panel_control_button2)
+*RightButtons2: (40x20, Frame 0)
+*RightButtons2: (25x20, Id desk0, Title "0", Action (Mouse 1) GotoDesk 0 0, Colorset 20, ActiveColorset 21, Frame 0)
+*RightButtons2: (25x20, Id desk1, Title "1", Action (Mouse 1) GotoDesk 0 1, ActiveColorset 12, Frame 0)
+*RightButtons2: (25x20, Id desk2, Title "2", Action (Mouse 1) GotoDesk 0 2, ActiveColorset 12, Frame 0)
+*RightButtons2: (25x20, Id desk3, Title "3", Action (Mouse 1) GotoDesk 0 3, ActiveColorset 12, Frame 0)
+*RightButtons2: (40x20, Frame 0)
+*RightButtons2: (180x118, Center, Swallow FvwmPager "Module FvwmPager *", Frame 0, Padding 8 8)
+*RightButtons2: (180x460, Center, Colorset 10, \
+								Swallow (SwallowNew) "fvwm_conky" "Exec exec conky -c $HOME/.config/conky/fvwm.conkyrc"), \
+								Frame 0, Padding 2 2)
+#*Rightbuttons2: (2x490, Frame 0)
+*RightButtons2: (36x36, Icon "media/emblem-music-symbolic.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec mpdevil")
+*RightButtons2: (36x36, Icon "media/media-skip-backward.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec mpc prev")
+*RightButtons2: (36x36, Icon "media/media-playback-start.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec mpc toggle")
+*RightButtons2: (36x36, Icon "media/media-playback-stop.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec mpc stop")
+*RightButtons2: (36x36, Icon "media/media-skip-forward.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec mpc next")
+#*Rightbuttons2: (30x24, Frame 0)
+#*Rightbuttons2: (180x20, Frame 0)
+*Rightbuttons2: (60x60, Icon "dock/kitty48.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec kitty")
+*RightButtons2: (60x60, Icon "dock/thunar48.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec thunar")
+*RightButtons2: (60x60, Icon "dock/firefox48.png", ActiveColorset 12, \
+              Action(Mouse 1) "Exec exec firefox")
+#*RightButtons2: (6x48, Frame 0)
+#*Dock: (1x1, Icon "dock/mpdevil48.png", ActiveColorset 12, \
+#              Action(Mouse 1) "Exec exec mpdevil")
+
+#============================================
+#==== FvwmButtons FvwmScript-MpdSongInfo ====
+#============================================
+
+DestroyModuleConfig FvwmMpd: *
+*FvwmMpd: Geometry 500x34+1160-0
+*FvwmMpd: Colorset 10
+*FvwmMpd: BoxSize smart
+*FvwmMpd: Frame 0
+*FvwmMpd: Font "xft:JetBrainsMono Nerd Font:size=10:bold:antialias=True"
+*FvwmMpd: Rows 34
+*FvwmMpd: Columns 300
+*FvwmMpd: (480x30, Center, Colorset 10, \
+		Swallow (SwallowNew) "mpd_conky" "Exec exec conky -c $HOME/.config/conky/fvwm_mpd.conkyrc"), \
 								Frame 0, Padding 2 2)
 
 #============
