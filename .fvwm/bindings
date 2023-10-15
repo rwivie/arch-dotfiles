@@ -106,7 +106,7 @@ Key Return A 4 Exec exec kitty
 #==== i3-volume
 Key XF86AudioRaiseVolume A A Exec exec i3-volume -nPp up 5
 Key XF86AudioLowerVolume A A Exec exec i3-volume -nPp down 5
-Key XF86AudioMute A A Exec exec i3-volume mute -n
+Key XF86AudioMute A A Exec exec i3-volume mute -np
 
 #==== Media keys
 Key XF86AudioPlay A A Exec exec playerctl play-pause
