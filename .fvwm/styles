@@ -98,6 +98,12 @@ Style FvwmTaskBar !Borders, !Title, WindowListSkip, \
 Style RightButtons !Title, Borders, !Handles, Sticky, \
                  WindowListSkip, NeverFocus, StaysOnBottom
 
+Style RightButtons2 !Title, Borders, !Handles, Sticky, \
+                 WindowListSkip, NeverFocus, StaysOnBottom
+
+Style FvwmMpd !Title, !Borders, !Handles, Sticky, \
+                 WindowListSkip, NeverFocus, StaysOnBottom
+
 Style Dock !Title, !Borders, !Handles, Sticky, \
                  WindowListSkip, NeverFocus, StaysOnBottom
                                 
@@ -124,6 +130,7 @@ Style Dock !Title, !Borders, !Handles, Sticky, \
 Style Xfce4-notes !Title
 Style sticky-note !Title
 Style Steam !Title
+Style kruler !Title
 
 #==== icon overrides
 #Style kitty EWMHMiniIconOverride, Icon kitty.svg:48x48, MiniIcon kitty.svg:18x18
