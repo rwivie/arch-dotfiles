@@ -24,6 +24,8 @@ ImagePath $[FVWM_USERDIR]/images:+:$[FVWM_USERDIR]/images/icons
 #==== for MpdButtons
 SetEnv fvwm_script $[FVWM_USERDIR]/scripts
 SetEnv fvwm_music_path /home/ron/Music
+#SetEnv fvwm_script	$[FVWM_USERDIR]/bin
+*FvwmScript: Path $[FVWM_USERDIR]/scripts
 
 #==============================
 Read bindings
@@ -49,11 +51,15 @@ BugOpts ExplainWindowPlacement On
 # actions that are run after a restart.
 DestroyFunc StartFunction
 AddToFunc   StartFunction
-+ I Module FvwmButtons RightButtons
-+ I Module FvwmButtons Dock
-+ I Module FvwmDebug -l /home/ron/.fvwm/log
+#+ I Module FvwmButtons RightButtons
++ I Module FvwmButtons RightButtons2
+#+ I Module FvwmButtons FvwmMpd
+#+ I Module FvwmButtons Dock
+#+ I Module FvwmDebug -l /home/ron/.fvwm/log
 + I Module FvwmButtons FvwmTaskBar
 + I Module FvwmEvent EventNewDesk
+#+ I Module FvwmScript FvwmApplet-MpdSongInfo
+#+ I Module FvwmScript FvwmScript-MpdSimple
 #Module FvwmConsole
 
 # Local configuration file. For use with the default-config.
