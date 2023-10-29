@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 typeset -U path PATH
-path=(~/.local/bin ~/.local/bin/statusbar $path)
+path=(~/.local/bin ~/.local/bin/statusbar ~/.cargo/bin $path)
 export PATH
 
 #==== exports
