@@ -9,6 +9,9 @@ default_border pixel 4
 # Default Font
 font pango:JetBrainsMono Nerd Font 10
 
+#==== set cursor
+seat seat0 xcursor_theme XCursor-Pro-Everforest-orange 32
+
 # Thin borders:
 smart_borders off
 
