@@ -27,6 +27,8 @@ Test (x $[infostore.runcmd]) + "R&un Command%icons/run_arrow.png%" Exec exec $[i
 + " " Title
 + " Music"	Popup FvwmMenuMPD
 + " " Title
++ " Edit"	Popup FvwmMenuEdit
++ " " Title
 + "  FvwmConsole" Module FvwmConsole -terminal xterm -fg #ebdbb2 -bg #282828
 + " " Title
 + "  $[gt.Re&fresh]" Refresh
@@ -42,6 +44,30 @@ AddToMenu FvwmMenuMPD
 + DynamicPopupAction Piperead '$[fvwm_script]/fvwm-menu-mpd'
 
 #=========================
+
+#==== glava ==========
+# GLava menu: spawn/kill/restart GLava + change audio backend
+# This menu is spawned by right clicking on the fvwmbutton containing GLava
+DestroyMenu GLavaMenu
+AddToMenu GLavaMenu
+#+ "Maximize" All (RightGLava) Maximize
++ "GLava: MPD" ChangeGLavaBackend fifo
++ "GLava: Pulseaudio" ChangeGLavaBackend pulseaudio
++ "Restart GLava" SpawnGLava
++ "Kill GLava" Exec killall glava
+#=========================
+
+#==== FvwmMenuEdit
+DestroyMenu FvwmMenuEdit
+AddToMenu FvwmMenuEdit
++ "Edit bindings" Exec exec mousepad ~/.fvwm/bindings
++ "Edit config" Exec exec mousepad ~/.fvwm/config
++ "Edit colorsets" Exec exec mousepad ~/.fvwm/colorsets_nord
++ "Edit functions" Exec exec mousepad ~/.fvwm/functions
++ "Edit menus" Exec exec mousepad ~/.fvwm/menus
++ "Edit modules" Exec exec mousepad ~/.fvwm/modules
++ "Edit decor" Exec exec mousepad ~/.fvwm/nord_decor
++ "Edit styles" Exec exec mousepad ~/.fvwm/style
 
 # Window Operations Menus
 DestroyMenu MenuWindowOps
