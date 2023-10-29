@@ -22,14 +22,14 @@ draw_shades = true,
 draw_outline = false,
 extra_newline = false,
 format_human_readable = true,
-font = 'JetBrainsMono Nerd Font:size=9',
+font = 'JetBrainsMono Nerd Font:size=8',
 --gap_x = 20,
 --gap_y = 45,
 if_up_strictness = 'address',
 imlib_cache_size = 0,
 max_text_width = 0,
 max_user_text = 16384,
-maximun_height = 470,
+--maximun_height = 470,
 maximum_width = 180,
 minimum_height = 500,
 minimum_width = 130,
@@ -70,6 +70,7 @@ color8 = '9da9a0', --darkwhite
 color9 = '2b3339', --dark1
 
 };
+
 
 conky.text = [[
 ${goto 60}Used${alignr}Size
