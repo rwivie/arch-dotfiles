@@ -108,14 +108,25 @@ AddToFunc MakeVisible
 + I Iconify off
 + I WindowShade off
 
-AddToFunc ToggleRightButtons2
-+ I ToggleWindow RightButtons2 "Module FvwmButtons RightButtons2"
+#==== RightButtons GLava specific functions ====
 
-AddToFunc ToggleDock
-+ I ToggleWindow Dock "Module FvwmButtons Dock"
+DestroyFunc SpawnGLava
+AddToFunc SpawnGLava
++ I Exec killall glava; exec glava -a $(cat $[FVWM_USERDIR]/glavabackend)
 
-AddToFunc ToggleRightMPDButtons
-+ I ToggleWindow RightMPDButtons "Module FvwmButtons RightMPDButtons"
+DestroyFunc ChangeGLavaBackend
+AddToFunc ChangeGLavaBackend
++ I Exec echo $0 > $[FVWM_USERDIR]/glavabackend
++ I SpawnGLava
+#========================
+
+#============================
+#==== toggle FvwmButtons ====
+#============================
+
+AddToFunc ToggleRightButtons
++ I ToggleWindow RightButtons "Module FvwmButtons RightButtons"
+
 
 #==== tiling
 # Function used for tiling/un-tiling windows.
