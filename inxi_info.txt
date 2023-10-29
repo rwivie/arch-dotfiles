@@ -1,0 +1,65 @@
+[ron@wasteland][~]% inxi -F
+System:
+  Host: wasteland Kernel: 6.5.8-zen1-1-zen arch: x86_64 bits: 64 Desktop: sway
+    v: 0.3.2-d89c3651 Distro: Arch Linux
+Machine:
+  Type: Desktop Mobo: ASUSTeK model: PRIME B450M-A v: Rev X.0x
+    serial: <superuser required> UEFI: American Megatrends v: 3802
+    date: 04/28/2022
+CPU:
+  Info: 12-core model: AMD Ryzen 9 5900X bits: 64 type: MT MCP cache:
+    L2: 6 MiB
+  Speed (MHz): avg: 2533 min/max: 2200/4950 cores: 1: 3700 2: 2200 3: 2200
+    4: 2200 5: 3700 6: 2200 7: 2200 8: 2200 9: 3700 10: 2200 11: 2200 12: 2200
+    13: 2200 14: 2200 15: 3600 16: 3700 17: 2200 18: 2800 19: 2200 20: 2200
+    21: 2200 22: 2200 23: 2200 24: 2200
+Graphics:
+  Device-1: AMD Ellesmere [Radeon RX 470/480/570/570X/580/580X/590]
+    driver: amdgpu v: kernel
+  Device-2: Logitech HD Webcam C510 driver: snd-usb-audio,uvcvideo type: USB
+  Display: wayland server: X.org v: 1.21.1.8 with: Xwayland v: 23.2.1
+    compositor: sway v: 0.3.2-d89c3651 driver: X: loaded: modesetting
+    unloaded: radeon,vesa dri: radeonsi gpu: amdgpu
+    resolution: 2560x1440~144Hz
+  API: EGL v: 1.5 drivers: radeonsi,swrast
+    platforms: wayland,x11,surfaceless,device
+  API: OpenGL v: 4.6 compat-v: 4.5 vendor: amd mesa v: 23.2.1-arch1.2
+    renderer: AMD Radeon RX 580 Series (polaris10 LLVM 16.0.6 DRM 3.54
+    6.5.8-zen1-1-zen)
+Audio:
+  Device-1: AMD Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590]
+    driver: snd_hda_intel
+  Device-2: AMD Starship/Matisse HD Audio driver: snd_hda_intel
+  Device-3: Logitech HD Webcam C510 driver: snd-usb-audio,uvcvideo type: USB
+  API: ALSA v: k6.5.8-zen1-1-zen status: kernel-api
+  Server-1: PipeWire v: 0.3.83 status: active
+Network:
+  Device-1: Realtek RTL8821CE 802.11ac PCIe Wireless Network Adapter
+    driver: rtw_8821ce
+  IF: wlp6s0 state: up mac: d8:c0:a6:dc:79:05
+  Device-2: Realtek RTL8111/8168/8411 PCI Express Gigabit Ethernet
+    driver: r8169
+  IF: enp7s0 state: up speed: 100 Mbps duplex: full mac: 24:4b:fe:d0:07:67
+Bluetooth:
+  Device-1: ASUSTek Bluetooth Radio driver: btusb type: USB
+  Report: btmgmt ID: hci0 state: up address: D8:C0:A6:DC:79:04 bt-v: 4.2
+Drives:
+  Local Storage: total: 6.59 TiB used: 921.19 GiB (13.7%)
+  ID-1: /dev/sda vendor: Western Digital model: WD20EZAZ-00L9GB0
+    size: 1.82 TiB
+  ID-2: /dev/sdb vendor: A-Data model: SU630 size: 223.57 GiB
+  ID-3: /dev/sdc vendor: Seagate model: WDC WDS200T2B0B-00YS70
+    size: 1.82 TiB
+  ID-4: /dev/sdd vendor: Toshiba model: DT01ABA300 size: 2.73 TiB type: USB
+Partition:
+  ID-1: / size: 502.9 GiB used: 108.54 GiB (21.6%) fs: ext4 dev: /dev/sdc2
+  ID-2: /boot/efi size: 1022 MiB used: 16.8 MiB (1.6%) fs: vfat
+    dev: /dev/sdc1
+Swap:
+  ID-1: swap-1 type: partition size: 8 GiB used: 0 KiB (0.0%) dev: /dev/sdc6
+Sensors:
+  System Temperatures: cpu: 50.2 C mobo: N/A gpu: amdgpu temp: 57.0 C
+  Fan Speeds (rpm): N/A gpu: amdgpu fan: 755
+Info:
+  Processes: 449 Uptime: 3m Memory: total: 32 GiB available: 31.25 GiB
+  used: 1.97 GiB (6.3%) Shell: Zsh inxi: 3.3.30
