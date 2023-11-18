@@ -1,5 +1,5 @@
 Xcursor.theme: XCursor-Pro-Everforest-orange
-Xcursor.size: 32
+Xcursor.size: 24
 
 !==== Fonts config ====
 !Xft.dpi: 142
@@ -34,7 +34,11 @@ st.font:         JetBrainsMono Nerd Font:style:regular:pixelsize=16
 !st.borderpx: 0
 
 !- 0.1 to 0.9 = transparency
-!st.alpha: 0.8
+st.alpha: 0.8
+
+st.background: #1e2327
+!st.foreground: #eceff4
+!st.cursorColor: #81a1c1
 
 !==== everforest2 mine
 ! special
@@ -42,8 +46,8 @@ st.font:         JetBrainsMono Nerd Font:style:regular:pixelsize=16
 *.background:   #2b3339
 *.cursorColor:  #d3c6aa
 
-! black
-*.color0:       #2b3339
+! black #changed color0 from 2b3339 to 1e2327
+*.color0:       #1e2327
 *.color8:       #2b3339
 
 ! red
