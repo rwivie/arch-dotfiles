@@ -12,3 +12,4 @@ print_command=true
 layer=overlay
 insensitive=true
 prompt=
+no_actions=true
