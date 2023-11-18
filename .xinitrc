@@ -53,6 +53,12 @@ fi
 #export XDG_SESSION_TYPE="x11"
 #exec dwmstart.sh
 
+#==== for dk
+export XDG_SESSION_DESKTOP="dk"
+export XDG_CURRENT_DESKTOP="dk"
+export XDG_SESSION_TYPE="x11"
+exec dk
+
 #==== for i3 
 #export XDG_SESSION_TYPE="x11"
 #export XDG_CURRENT_DESKTOP="i3"
@@ -60,9 +66,9 @@ fi
 #exec i3 -V -d all &>> "$HOME/.i3.log"
 
 #==== for fvwm3
-export XDG_SESSION_DESKTOP="fvwm"
-export XDG_CURRENT_DESKTOP="fvwm"
-exec fvwmstart.sh
+#export XDG_SESSION_DESKTOP="fvwm"
+#export XDG_CURRENT_DESKTOP="fvwm"
+#exec fvwmstart.sh
 
 #exec startxfce4
 #exec openbox-session
