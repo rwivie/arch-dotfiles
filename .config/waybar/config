@@ -1,50 +1,31 @@
 // Global 
+// based on https://github.com/NorNub/HyprDots
+
 {
-    "layer": "bottom",
-    "position": "top",
-    "exclusive": "true",
-    "height": 32,
-    "spacing": 6,
-
-    "modules-left": [
-        "custom/launcher",
-        "sway/workspaces",
-        "sway/mode",
-        "sway/window",
-    ],
- 
-    "modules-center": [
-        //"custom/weather",
-        "custom/wttrbar",
-        "custom/line",
-        "clock",
-        "custom/line2",
-        //"custom/pacman"
-        "custom/updates"
-    ],
-
-    "modules-right": [
-	"mpd",        
-        "memory",
-        "cpu",
-        "custom/hyprpicker",
-        //"custom/recording",
-        "custom/wf-record",
-        "custom/cheat",
-	//"custom/bluetooth-battery",
-        "pulseaudio",
-        "pulseaudio#microphone",
-        "tray",
-        "custom/power",
-    ],
+  "layer": "top",
+  "modules-left": ["custom/launcher", "sway/workspaces", "sway/window", "sway/mode"],
+  "modules-center": ["custom/wttrbar", "clock", "custom/updates"],
+  "modules-right": ["memory", "cpu", "mpd", "pulseaudio", "tray", "custom/power"],
 
     // Modules
 
     "custom/launcher": {
         "format":" ",
-        "on-click": "exec nwg-menu -va top -cmd-lock swaylock -cmd-logout swaymsg exit -cmd-restart systemctl reboot -cmd-shutdown systemctl -i poweroff -term foot",
+        "on-click": "exec nwg-menu -va top -cmd-lock swaylock -cmd-logout swaymsg exit -cmd-restart loginctl reboot -cmd-shutdown loginctl -i poweroff -term foot",
         "tooltip": false,
     },
+
+  "gamemode": {
+    "format": "{glyph} {count}",
+    "glyph": "󰊴",
+    "hide-not-running": true,
+    "use-icon": true,
+    "icon-name": "input-gaming-symbolic",
+    "icon-spacing": 4,
+    "icon-size": 20,
+    "tooltip": true,
+    "tooltip-format": "Games running: {count}"
+  },
 
     "sway/workspaces": {
         "disable-scroll": false,
@@ -55,7 +36,7 @@
             "1": "1: ",
             "2": "2: ",
             "3": "3: ",
-            "4": "4: ",
+            "4": "4: ",
             "5": "5: ",
             "6": "6: ",
             "7": "7: ",
@@ -71,14 +52,6 @@
 
     "sway/window": {
 	"format": "{}",
-        "icon": true,
-        "icon-size": 11,
-	"max-length": 120,
-        "rewrite": {
-           "(.*) - Mozilla Firefox": "🌎 $1",
-           "(.*) - vim": " $1",
-           "(.*) - zsh": " [$1]",
-        }
     },
 
     "custom/weather": {
@@ -104,7 +77,7 @@
     },
 
     "clock": {
-        "format": "{:%I:%M}  ",
+        "format": "{:%I:%M}",
         "format-alt": "{:%A, %B %d, %Y (%R)}  ",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
@@ -114,11 +87,11 @@
                     "on-scroll"     : 1,
                     "on-click-right": "mode",
                     "format": {
-                              "months":     "<span color='#ffead3'><b>{}</b></span>",
-                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              "months":     "<span color='#f9e2af'><b>{}</b></span>",
+                              "days":       "<span color='#cba6f7'><b>{}</b></span>",
+                              "weeks":      "<span color='#a6e3a1'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#fab387'><b>{}</b></span>",
+                              "today":      "<span color='#f38ba8'><b><u>{}</u></b></span>"
                               }
                     },
         "actions":  {
@@ -155,8 +128,37 @@
         "exec-if": "exit 0",                  			// always run; consider advanced run conditions
         "on-click": "foot sh -c 'yay; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8,
-        "tooltip": false,
+        "tooltip": true,
+        "tooltip-format": "{$HOME/.local/bin/news-archlinux.py}",
     },
+
+
+
+
+  "tray": {
+    "spacing": 10
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󰂑",
+      "headset": "󰂑",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+//  "clock": {
+//    "format": "{:%A %H:%M} ",
+//    "tooltip-format": "<tt>{calendar}</tt>"
+//  }
 
       "mpd": {
         "interval": 2,
@@ -200,90 +202,22 @@
             "warning": 70,
             "critical": 90,
         },
-        "on-click": "xfce4-terminal -e 'htop'",
+        "on-click": "foot 'htop'",
     },
 
     "custom/hyprpicker": {
-        "format": "",
+        //"format":" ",
+        "format":"",
+        //"on-click": "exec wofi -c ~/.config/wofi/config -I",
         "on-click": "exec hyprpicker -a",
         "tooltip": false,
     },
 
-    "custom/recording": {
-	"exec": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh status",
-	"format": "{}",
-	"on-click": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh toggle fullscreen",
-	"on-click-right": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh toggle region",
-	"restart-interval": 1,
-	"return-type": "json",
-	"tooltip": true
-    },
-
-"custom/wf-record": {
-		"format": "{}",
-		"interval": "once",
-		//"exec": "echo ''",
-                "exec": "echo ' '",
-		"tooltip": "false",
-		"exec-if": "pgrep 'wf-recorder'",
-		"on-click": "exec $HOME/.config/waybar/scripts/wf-record.sh",
-		"signal": 8
-	},
-
-    "custom/cheat": {
-        "format": "",
-        /*"on-click": "zenity --text-info --filename=$HOME/.config/sway/cheatsheet.txt --width=800 --height=600",*/
-        "on-click": "$HOME/.config/sway/cheat.sh",
-        "tooltip": false,
-    },
-
-  "custom/bluetooth-battery": {
-    "format": "{}",
-    "return-type": "json",
-    "interval": 5,
-    "exec": "~/.config/waybar/scripts/bluetooth-battery-bluetooth-module.sh",
-    "exec-if": "~/.config/waybar/scripts/bluetooth_battery_status.sh >/dev/null 2>&1",
-    "signal": 9
-  },
-
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "",
-        "on-click": "pamixer -t",
-        "on-click-right": "pavucontrol",
-        "on-scroll-up": "pamixer -i 5",
-        "on-scroll-down": "pamixer -d 5",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        }
-    },
-
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "format-source": " {volume}%",
-        "format-source-muted": "",
-        "on-click": "pamixer --default-source -t",
-        "on-click-right": "pavucontrol",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
-    },
-
-    "tray": {
-        "icon-size": 18,
-        "spacing":10,
-     },
-
       "custom/power": {
           "format":"⏻",
-          "on-click": "exec rofi_run_sway -pf",
+          "on-click": "exec wlogout -css $HOME/.config/wlogout/style.css -l $HOME/.config/wlogout/layout -b 5 -m 650 -c 50 -p layer-shell",
           "tooltip": false,
       },
+
 }
+
