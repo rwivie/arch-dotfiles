@@ -1,311 +1,143 @@
-/* =============================================================================
+/*
+ * Waybar styles config
+ * ~/.config/waybar/style.css
+ * based on https://gitlab.com/fazzi/dotfiles  
+ * made for `waybar-hyprland`
+ * remember to download `JetBrainsMono Nerd Font` font,
+ * `sudo pacman -S ttf-jetbrains-mono-nerd` on Arch Linux
  *
- * Waybar configuration
+ * yes i have no knowledge about css
+ * why am i commenting everything
  *
- * Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
- *
- * =========================================================================== */
+ * this config works in a terrible way, please do not edit
+ */
 
-label {
-    all: unset;
-}
-button {
-    all: unset;
-}
+/* worked good enough for me. based on https://github.com/NorNub/HyprDots  edited by wickedlester*/
 
-/* -----------------------------------------------------------------------------
- * Keyframes
- * -------------------------------------------------------------------------- */
-
-/*@define-color highlight #5294e2 ;*/
-@define-color highlight #7fbbb3;
-@define-color highlight2 #a7c080;
-@define-color base1  #4b565c;
-@define-color border    #2b3339;
-@define-color border2  #7fbbb3;
-
-@keyframes blink-warning {
-    70% {
-        color: white;
-    }
-
-    to {
-        color: white;
-        background-color: orange;
-    }
-}
-
-@keyframes blink-critical {
-    70% {
-      color: white;
-    }
-
-    to {
-        color: white;
-        background-color: red;
-    }
-}
-
-/* -----------------------------------------------------------------------------
- * Base styles
- * -------------------------------------------------------------------------- */
-
-/* Reset all styles */
 * {
-    border: none;
-    border-radius: 0;
-    min-height: 0;
-    margin: 1px;
-    padding: 0;
+  font: bold 14px "JetBrainsMono Nerd Font"; /* font weight, font size and font. propo nerd font for centered icons, symbols nerd font does not work great on bold text */
+  color: #d3c6aa; /* text color */
 }
 
-#waybar {
-        background: rgba(30,35,38,0.8);
-	color: #d3c6aa;
-        border-radius: 0px;
-        border-bottom: 4px solid #7fbbb3;
-        font-family: JetBrainsMono Nerd Font;
-        font-size: 14px;
+window#waybar {
+  background: transparent; /* main window transparent background */
 }
-
-/* Every module */
-#custom-launcher,
-#workspaces,
-#mode,
-#window,
-#custom-wttrbar,
-#custom-weather,
-#custom-line,
-#clock,
-#custom-line2,
-#custom-updates,
-#custom-pacman,
-#mpd,
-#memory,
-#cpu,
-#custom-hyprpicker,
-#custom-wf-record,
-#custom-cheat,
-#custom-bluetooth-battery,
-#pulseaudio,
-#pulseaudio#microphone,
-#tray,
-#custom-power {
-    margin-bottom: 4px;
-}
-
-/* -----------------------------------------------------------------------------
- * Modules styles
- * -------------------------------------------------------------------------- */
 
 tooltip {
-  background: rgba(43, 51, 57, 0.5);
-  border: 2px solid rgba(33, 41, 47, 1.0);
+  background: #1e2326; /* tooltip background */
+  border: 2px solid #7fbbb3; /* tooltip border size and color */
+  border-radius: 5px; /* tooltip rounded corners */
 }
-tooltip label {
-  color: #d3c6aa;
+
+/* *****************************
+ * modules (pills) section start
+ * *****************************/
+#custom-launcher,
+#gamemode,
+#window,
+#workspaces,
+#mode,
+#tray,
+#pulseaudio,
+#custom-updates,
+#custom-pacman,
+#idle_inhibitor,
+#custom-weather,
+#custom-wttrbar,
+#clock,
+#memory,
+#cpu,
+#mpd,
+#custom-power,
+#cava {
+  text-shadow: 1px 1px 2px black; /* text shadow, offset-x | offset-y | blur-radius | color */
+  background: #242841; /* background color */
+  margin: 10px 4px 4px 4px; /* empty spaces around */
+  padding: 4px 10px; /* extend pill size, vertical then horizontal */
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4); /* pill background shadows */
+  border-radius: 5px; /* rounded corners */
 }
+
+/* extend empty space on both side of the bar,
+ * value from ~/.config/hypr/hyprland.conf
+ * gaps_out (8px) + border size (2px) = 10px */
 
 #custom-launcher {
     color: #7fbbb3;
-    border-radius: 10px;
-    /*background-color: rgba(43, 51, 57, 0.6);*/
-    background-color: rgba(75, 86, 92, 0.6);
-    padding-left: 18px;
-    padding-right: 15px;
     font-size:15px;
-    margin-left:8px;
-    margin-right:10px;
-}
-
-#workspaces {
-    font-size:13px;
-}
-
-#workspaces button {
-    border-bottom: 3px solid transparent;
-    color: #7fbbb3;
-    margin-bottom: 0px;
-}
-
-#workspaces button.focused {
-    color: #1e2326;
-    background-color: rgba(167, 192, 128, 0.6);
-    border-radius: 10px;
-    margin-bottom: 1px;
-}
-
-#workspaces button:hover {
-    color: #1e2326;
-    border-radius: 10px;
-    background: rgba(127, 187, 179, 0.6);
-}
-
-#workspaces button.urgent {
-    color: #1e2326;
-    border-radius: 10px;
-    background-color: rgba(230, 126, 128, 0.6);
-}
-
-#mode {
-    background: @highlight;
-    border-bottom: 3px transparent;
-    color:white;
-    margin-left: 5px;
-    padding: 7px;
-}
-
-#window {
-    color: #d3c6aa;
-    background: transparent;
-}
-
-#custom-weather {
-    color: #dbbc7f;
-}
-
-#custom-line {
-    color: #7a8478;
 }
 
 #clock {
-    color: #dbbc7f;
-    border-radius: 10px;
-    padding-left: 18px;
-    padding-right: 15px;
-    background-color: rgba(127, 187, 179, 0.6);
-}
-
-#custom-line2 {
-    color: #7a8478;
+  margin-right: 10px;
 }
 
 #custom-updates {
-    /*padding-left: 16px;*/
-    padding-right: 8px;
-    border-radius: 10px 0px 0px 10px;
-    transition: none;
+    padding-right: 15px;
     color: #dbbc7f;
-    background: transparent;
 }
 
 #custom-pacman {
-    padding-right: 8px;
-    border-radius: 10px 0px 0px 10px;
-    transition: none;
+    padding-right: 15px;
     color: #dbbc7f;
-    background: transparent;
+}
+
+#workspaces {
+  padding: 0px; /* remove padding around workspace module */
+}
+
+#workspaces button {
+  padding: 0px 4px; /* fit with pill padding, 0px for not haveing duped vertical padding, 4px to make a square (4px value from module padding: ...#clock {padding >>4px<< 10px}) */
+  border: 2px solid transparent; /* required by active workspace top color, or the bar will jitter */
+  transition-property: background-color, border-top-color; /* smooth transition for workspace module */
+  transition-duration: .1s;
+}
+
+/*#workspaces button.active {
+  color: #a6adc8;
+}*/
+
+#workspaces button.focused {
+    /*color: #a6e3a1;*/
+    background-color: #2b3339;
+    border-top-color: #7fbbb3;
+}
+
+#workspaces button:hover {
+  background-color: #4b565c; 
+}
+
+#idle_inhibitor.activated {   
+    color: #e69875;
+}
+
+#idle_inhibitor.deactivated { 
+    color: #dbbc7f;
+}
+
+#memory {
+    color: #7fbbb3;
+}
+
+#cpu {
+    color: #e69875;
 }
 
 #mpd {
     color: #d699b6;
-    background: transparent;
-    margin-right: 5px;
-    margin-left: 5px;
-    margin-bottom: 7px;
-}
-
-#memory {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    color: #a7c080;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-#memory.warning {
-    color: orange;
-    padding-left: 10px;
-    padding-right: 10px;
- }
-
-#memory.critical {
-    color: red;
-    animation-name: blink-critical;
-    animation-duration: 2s;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-#cpu {
-    color: #a3c092;
-}
-
-#cpu.warning {
-    color: orange;
-}
-
-#cpu.critical {
-    color: red;
-}
-
-#custom-hyprpicker {
-    color: #e69875;
-    margin-left:15px;
-    margin-right:15px;
-    font-size:15px;
-    /*padding-left: 10px;
-    padding-right: 10px;*/
-}
-
-#custom-recording {
-    color: #e69875;
-    margin-left:15px;
-    margin-right:15px;
-    font-size:15px;
-    /*padding-left: 10px;
-    padding-right: 10px;*/
-}
-
-#custom-wf-record {
-    color: #e67e80;
-    margin-left:15px;
-    margin-right:15px;
-    font-size:15px;
-    /*padding-left: 10px;
-    padding-right: 10px;*/
-}
-
-#custom-cheat {
-    color: #e69875;
-    margin-left:15px;
-    margin-right:15px;
-    font-size:15px;
-    /*padding-left: 10px;
-    padding-right: 10px;*/
-}
-
-#custom-bluetooth-battery {
-    color: #7fbbb3;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 #pulseaudio {
-    color: #7fbbb3;
-    border-left: 0px;
-    border-right: 0px;
-    padding-left: 10px;
-    padding-right: 10px;
+    color: #83c092;
+    padding-right: 15px;
 }
 
 #pulseaudio.microphone {
     color: #d699b6;
-    border-left: 0px;
-    border-right: 0px;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 #custom-power {
-    color: #e67e80;
-    border-radius: 10px;
-    /*background-color: rgba(43, 51, 57, 0.6);*/
-    background-color: rgba(75, 86, 92, 0.6);
-    margin-left:15px;
-    margin-right:8px;
-    padding-left: 15px;
-    padding-right: 18px;
-    font-size:15px;
+  color: #e67e80;
+  padding-right: 13px;
 }
+
+
