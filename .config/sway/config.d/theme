@@ -32,7 +32,7 @@ blur_radius 5
 blur_passes 3
 
 #==== layer effects    sleep 10 && swaymsg -r -t get_outputs
-layer_effects "waybar" blur enable; blur_ignore_transparent enable; shadows enable; corner_radius 0
+#layer_effects "waybar" blur enable; blur_ignore_transparent enable; shadows enable; corner_radius 0
 layer_effects "notifications" blur enable; blur_ignore_transparent enable; shadows enable; corner_radius 0
 layer_effects "wofi" blur enable; blur_ignore_transparent enable; shadows enable; corner_radius 10
 layer_effects "rofi" blur enable; blur_ignore_transparent enable; shadows enable; corner_radius 0
