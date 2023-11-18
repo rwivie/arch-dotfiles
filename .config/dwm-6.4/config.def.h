@@ -17,7 +17,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=12", "Material Design Icons:Regular:pixelsize=19:antialias=true" };
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=9", "Material Design Icons:Regular:pixelsize=19:antialias=true" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#1e2326";
 static const char col_gray2[]       = "#272e33";
@@ -42,7 +42,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "󰺻" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "󰺻", ""};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -55,8 +55,10 @@ static const Rule rules[] = {
         { "Thunar",   NULL,	  NULL,       1 << 2,       1,             0,             -1 },
         { "Mousepad", NULL,       NULL,       1 << 3,       1,             0,             -1 },
         { "discord",  NULL,       NULL,       1 << 7,       1,             0,             -1 },
+	{ "dev.geopjr.Tuba",	NULL,	NULL,	1 << 7,		1,		0,		-1 },
         { "Cider",    NULL,       NULL,       1 << 6,       0,             0,             -1 },
         { "thunderbird", NULL,     NULL,      1 << 8,       1,             0,             -1 },
+	{ "kdeconnect.sms",	NULL,	NULL,	1 << 9,		1,		1,		-1 },
 };
 
 /* layout(s) */
@@ -161,10 +163,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
         { 0,				XF86XK_Tools,		   spawn,         SHCMD("kitty ncmpcpp") },
-	{ 0,				XF86XK_AudioPlay,	   spawn,	  SHCMD("playerctl play-pause") },
-	{ 0,				XF86XK_AudioPrev,	   spawn,	  SHCMD("playerctl previous") },
-	{ 0,				XF86XK_AudioNext,	   spawn,	  SHCMD("playerctl next") },
-	{ 0,				XF86XK_AudioStop,	   spawn,	  SHCMD("playerctl stop") },
+	{ 0,				XF86XK_AudioPlay,	   spawn,	  SHCMD("mpc toggle") },
+	{ 0,				XF86XK_AudioPrev,	   spawn,	  SHCMD("mpc prev") },
+	{ 0,				XF86XK_AudioNext,	   spawn,	  SHCMD("mpc next") },
+	{ 0,				XF86XK_AudioStop,	   spawn,	  SHCMD("mpc stop") },
         { 0,                            XF86XK_AudioMute,          spawn,         SHCMD("pactl set-sink-mute 0 toggle; kill -44 $(pidof dwmblocks)") },
         { 0,                            XF86XK_AudioLowerVolume,   spawn,         SHCMD("pactl set-sink-mute 0 false ; i3-volume -nPpC down 5; kill -44 $(pidof dwmblocks)") },
         { 0,                            XF86XK_AudioRaiseVolume,   spawn,         SHCMD("pactl set-sink-mute 0 false ; i3-volume -nPpC up 5; kill -44 $(pidof dwmblocks)") },
