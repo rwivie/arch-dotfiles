@@ -1,0 +1,173 @@
+# example sxhkdrc for use with dk 
+#########################################################
+
+# launcher
+alt + p
+	dmenu_run
+
+# launcher
+super + d
+         rofi -show run -theme ~/.config/rofi/themes/dmenu.rasi
+
+# terminal
+alt + shift + Return
+	kitty
+
+super + Return
+    st
+
+super + shift + Return
+	st
+
+# program launcher
+# super + space
+alt + F1
+	rofi_run_dk -d
+
+#super + space
+#	rofi_run_dk -d
+
+#==== rofi logout
+super + x
+         rofi_run_dk -l
+
+# screenshot and selection capture
+#{_,alt + }@Print
+#	scrot {_,-s}
+
+#==== screenshot in5
+Print
+     ob-screenshot --in5
+
+#==== screenshot-now
+super + Print
+     ob-screenshot --now
+
+# dedicated volume keys
+#{XF86AudioRaiseVolume,XF86AudioLowerVolume}
+	pamixer {-i,-d} 2
+
+# dedicated backlight keys
+#{XF86MonBrightnessUp,XF86MonBrightnessDown}
+	xbacklight {+10,-10}
+
+# alt volume keys
+#alt + {Insert,Delete}
+#	pamixer {-i,-d} 2
+
+#==== for i3-volume
+XF86AudioRaiseVolume 
+        /home/ron/.local/bin/i3-volume -nPp up 5
+XF86AudioLowerVolume 
+        /home/ron/.local/bin/i3-volume -nPp down 5
+XF86AudioMute 
+        /home/ron/.local/bin/i3-volume mute -n
+
+#==== media keys
+XF86AudioPlay 
+        mpc toggle
+XF86AudioNext 
+        mpc next
+XF86AudioPrev 
+        mpc prev
+XF86Tools
+	kitty ncmpcpp
+
+#==== toggle picom
+super + c
+        dk-isrunning-picom --toggle
+
+#==== toggle mpd polybar
+super + m
+	polybar-msg action mpd module_toggle
+
+# reload sxhkd
+alt + shift + x
+	pkill -USR1 -x sxhkd
+
+
+
+# quit dk
+alt + shift + q
+	dkcmd exit
+
+## reload dkrc
+#alt + shift + r
+#	dkcmd reload
+
+# reload dk re-execute dkrc
+super + shift + r
+        killall pasystray && killall xfce-polkit && $HOME/.config/dk/dkrc
+
+# restart dk re-execute dk
+alt + ctrl + shift + r
+	dkcmd restart
+
+#==== hide polybar
+alt + shift + p
+        polybar-msg cmd hide
+
+#==== show polybar
+ctrl + shift + p
+        polybar-msg cmd show
+
+# focus next or previous window
+alt + {j,k}
+	dkcmd win focus {next,prev}
+
+# close window, swap tiled window in/out of master, cycle tiled windows in place
+super + {q,space,Tab}
+	dkcmd win {kill,swap,cycle}
+
+# close window
+super + shift + q
+        dkcmd win kill
+
+# toggle fullscreen and fake fullscreen (enable manipulating fullscreen window)
+{_,alt + }F11
+	dkcmd win {full,fakefull}
+
+# toggle floating or sticky
+alt + shift + {space,s}
+	dkcmd win {float,stick}
+
+# move window, signed (+/-) for relative changes
+super + shift + {h,j,k,l}
+	dkcmd win resize {x=-20,y=+20,y=-20,x=+20}
+
+# resize window, signed (+/-) for relative changes
+super + ctrl + {h,j,k,l}
+	dkcmd win resize {w=-20,h=+20,h=-20,w=+20}
+
+# move the active window up/down the stack
+super + {Up,Down}
+	dkcmd win mvstack {up,down}
+
+# view, send, or follow to a workspace (by number)
+super + {_,shift + ,ctrl + }{1-9,0}
+	dkcmd ws {view,send,follow} {1-9,10}
+
+# view, send, or follow to the next, previous, last active,
+# next non-empty, or prev non-empty workspace
+super + {_,shift + ,ctrl + }{bracketleft,bracketright,BackSpace,Left,Right}
+	dkcmd ws {view,send,follow} {prev,next,last,prevne,nextne}
+
+# view, send, or follow to the next, previous, or last active monitor
+super + {_,shift + ,ctrl + }{comma,period,backslash}
+	dkcmd mon {view,send,follow} {prev,next,last}
+
+# change active workspace layout
+super + {t,r,m,g,s,w,f,u}
+	dkcmd set layout {tile,rtile,mono,grid,spiral,dwindle,none,tstack}
+
+# change number of windows in master or first stack
+super + {_,shift + }{i,d}
+	dkcmd set {master,stack} {+1,-1}
+
+# change gap width
+super + {equal,minus}
+	dkcmd set gap {+5,-5}
+
+# change border widths
+super + ctrl + {_,shift + }{equal,minus}
+	dkcmd set border {width,outer_width} {+1,-1}
