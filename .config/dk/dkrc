@@ -21,11 +21,7 @@ fi
 #fi
 
 #==== run some shit
-#nitrogen --restore &
-#xrdb -load ~/.Xresources &
-#~/.config/dk/polybar/launch.sh &
-#~/.config/dk/autostart &
-dk_start.sh &
+dkstart.sh &
 
 # adjust border widths based on the DPI of the monitor
 #px=$(xrandr | grep ' connected' | tail -n1 | grep -o '[0-9]\+x[0-9]\+' | cut -d'x' -f2)
@@ -78,7 +74,7 @@ dk_start.sh &
 		ws=1  name="1: " \
 		ws=2  name="2: " \
 		ws=3  name="3: " \
-		ws=4  name="4: " \
+		ws=4  name="4: " \
 		ws=5  name="5: " \
 		ws=6  name="6: " \
 		ws=7  name="7: " \
@@ -158,17 +154,6 @@ dk_start.sh &
 	#	outer_focus='#2e3440' \
 	#	outer_unfocus='#2e3440' \
 	#	outer_urgent='#2e3440'
-
-	#==== from artix ====
-        #	dkcmd set border width=6 outer_width=4 \
-	#	colour \
-	#	focus='#5e81ac' \
-	#	unfocus='#2e3440' \
-	#	urgent='#d08770' \
-	#	outer_focus='#1e1e1e' \
-	#	outer_unfocus='#2e3440' \
-	#	outer_urgent='#1e1e1e'
-	#====================
 
         	#dkcmd set border width=6 outer_width=2 \
                 dkcmd set border width=6 outer_width=3 \
