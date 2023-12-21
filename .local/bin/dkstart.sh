@@ -7,7 +7,7 @@ numlockx on &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 #xsettingsd &
 nm-applet &
-picom --config ~/.config/picom/picom.conf &
+picom -b --config ~/.config/picom/picom.conf &
 dunst -conf ~/.config/dk/dunst/dunstrc &
 xautolock -time 10 -locker lock -corners '+-00' -cornerdelay 15 -notify 15 -notifier "notify-send 'Screen will lock in 15 s'" &
 blueman-applet &
