@@ -42,6 +42,15 @@ assign [class="discord"] 8
 for_window [class="teams-for-linux"] focus
 assign [class="teams-for-linux"] 8
 
+#for_window [app_id="thunderbird"] focus
+assign [app_id="thunderbird"] 9
+
+#for_window [app_id="valent"] focus
+assign [app_id="valent"] 10
+
+for_window [class="Google-chrome"] focus
+assign [class="Google-chrome"] 11
+
 #"gsimplecal"
 for_window [app_id="gsimplecal"] border none
 
