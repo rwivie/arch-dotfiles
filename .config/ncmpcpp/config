@@ -18,4 +18,7 @@ startup_screen = "playlist"
 #locked_screen_width_part = 50
 #ask_for_locked_screen_width_part = no
 
+#song_window_title_format = "ncmpcpp"
+enable_window_title = "no"
+
 #execute_on_song_change="/home/ron/.local/bin/np"
