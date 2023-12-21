@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 typeset -U path PATH
-path=(~/.local/bin ~/.local/bin/statusbar ~/.cargo/bin $path)
+path=(~/.local/bin ~/.local/bin/statusbar ~/.local/bin/wm ~/.cargo/bin $path)
 export PATH
 
 #==== exports
@@ -11,6 +11,11 @@ export BROWSER="firefox"
 export TERMINAL="kitty"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export WTRLOC="Coleman"
+
+#==== kunst exports
+export KUNST_SIZE="250x250"
+export KUNST_POSITION="+2270+1149"
+export KUNST_MUSIC_DIR="/home/ron/Music/"
 
 #==== for ranger to use only local config
 export RANGER_LOAD_DEFAULT_RC=false
