@@ -39,6 +39,7 @@ tooltip {
 #mode,
 #tray,
 #pulseaudio,
+#custom-headset,
 #custom-updates,
 #custom-pacman,
 #idle_inhibitor,
@@ -49,6 +50,13 @@ tooltip {
 #cpu,
 #mpd,
 #custom-power,
+#custom-power,
+#custom-power1,
+#custom-quit,
+#custom-lock,
+#custom-reboot,
+#custom-shutdown,
+#custom-sleep,
 #cava {
   text-shadow: 1px 1px 2px black; /* text shadow, offset-x | offset-y | blur-radius | color */
   background: #242841; /* background color */
@@ -76,8 +84,29 @@ tooltip {
     color: #dbbc7f;
 }
 
-#custom-pacman {
+/*#custom-pacman {
     padding-right: 15px;
+    color: #dbbc7f;
+}*/
+
+@keyframes blink-update {
+	to {
+		background-color: #e69875;
+	}
+}
+
+#custom-pacman {
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+#custom-pacman.pending-updates {
+	animation-name: blink-update;
+	animation-duration: 3s;
+}
+
+#custom-pacman {
+    padding-right: 13px;
     color: #dbbc7f;
 }
 
@@ -135,7 +164,12 @@ tooltip {
     color: #d699b6;
 }
 
-#custom-power {
+#custom-headset {
+    padding-right: 20px;
+    color: #dbbc7f;
+}
+
+#custom-power1 {
   color: #e67e80;
   padding-right: 13px;
 }
