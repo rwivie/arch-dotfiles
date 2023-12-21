@@ -11,13 +11,16 @@ super + d
 
 # terminal
 alt + shift + Return
-	kitty
+	st
 
 super + Return
-    st
+        alacritty
 
 super + shift + Return
-	st
+	kitty
+
+super + r
+	rofi_run_dk -r
 
 # program launcher
 # super + space
@@ -30,6 +33,9 @@ alt + F1
 #==== rofi logout
 super + x
          rofi_run_dk -l
+
+super + b
+	kitty btop
 
 # screenshot and selection capture
 #{_,alt + }@Print
@@ -70,8 +76,16 @@ XF86AudioNext
         mpc next
 XF86AudioPrev 
         mpc prev
+#XF86Tools
+#	kitty ncmpcpp
+
 XF86Tools
-	kitty ncmpcpp
+#	printf "\033]2;ncmpcpp\007" && alacritty -e ncmpcpp
+	alacritty --title ncmpcpp -e ncmpcpp
+
+#==== kunst
+super + k
+	kunst
 
 #==== toggle picom
 super + c
