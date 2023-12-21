@@ -1,48 +1,59 @@
 // Global 
+// based on https://github.com/NorNub/HyprDots
+
 {
-    "layer": "top",
-    "position": "top",
-    "exclusive": "true",
-    "height": 32,
-    "spacing": 6,
-
-    "modules-left": [
-        "custom/launcher",
-        "hyprland/workspaces",
-        "hyprland/window",
-    ],
- 
-    "modules-center": [
-        //"custom/weather",
-        "custom/wttrbar",
-        "custom/line",
-        "clock",
-        "custom/line2",
-        //"custom/pacman"
-        "custom/updates"
-    ],
-
-    "modules-right": [
-	"mpd",        
-        "memory",
-        "cpu",
-        "custom/hyprpicker",
-        //"custom/recording",
-        "custom/wf-record",
-        "custom/cheat",
-        "pulseaudio",
-        "pulseaudio#microphone",
-        "tray",
-        "custom/notification",
-        "custom/power",
-    ],
+  "layer": "top",
+  "modules-left": ["custom/launcher", "hyprland/workspaces", "hyprland/window", "hyprland/submap"],
+  "modules-center": ["custom/wttrbar", "clock", "custom/updates"],
+  "modules-right": ["memory", "cpu", "mpd", "pulseaudio", "custom/notification", "tray", "group/power"],
 
     // Modules
 
     "custom/launcher": {
-        "format":" ",
-        "on-click": "sleep 0.15 && exec nwg-menu -va top -cmd-lock swaylock -cmd-logout hyprctl dispatch exit x -cmd-restart systemctl reboot -cmd-shutdown systemctl -i poweroff -term foot",
+        "format": " ",
+        "on-click": "sleep 0.15 && exec nwg-menu -va top -s $HOME/.config/nwg-panel/menu-start-hypr.css -cmd-lock swaylock -cmd-logout swaymsg exit -cmd-restart loginctl reboot -cmd-shutdown loginctl -i poweroff -term foot",
         "tooltip": false,
+    },
+
+  "gamemode": {
+    "format": "{glyph} {count}",
+    "glyph": "󰊴",
+    "hide-not-running": true,
+    "use-icon": true,
+    "icon-name": "input-gaming-symbolic",
+    "icon-spacing": 4,
+    "icon-size": 20,
+    "tooltip": true,
+    "tooltip-format": "Games running: {count}"
+  },
+
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "disable-markup" : false,
+        "all-outputs": true,
+        "format": "  {icon}  ",
+        "format-icons": {
+            "1": "1: ",
+            "2": "2: ",
+            "3": "3: ",
+            "4": "4: ",
+            "5": "5: ",
+            "6": "6: ",
+            "7": "7: ",
+            "8": "8: ",
+            "9": "9: 󰊫",
+            "10": "10: ",
+            "11": "11: ",
+        }
+    },
+
+    "sway/mode": {
+        "format": "{}",
+        "tooltip": false
+    },
+
+    "sway/window": {
+	"format": "{}",
     },
 
     "hyprland/workspaces": {
@@ -61,7 +72,9 @@
             "6": "6: ",
             "7": "7: ",
             "8": "8: ",
-            "9": "9: ",
+            "9": "9: 󰊫",
+            "10": "10: ",
+            "11": "11: ",
             "urgent": "",
             "default": ""
         }
@@ -74,7 +87,7 @@
 
     "hyprland/window": {
 	"format": "{}",
-        "icon": true,
+        "icon": false,
         "icon-size": 11,
 	"max-length": 120,
         "rewrite": {
@@ -88,7 +101,7 @@
         "format": "{}",
         "tooltip": true,
         "interval": 3600,
-        "exec": "~/.config/hypr/waybar/scripts/weather.py -l coleman -u F -w M",
+        "exec": "~/.config/waybar/scripts/weather.py -l coleman -u F -w M",
         "return-type": "json"
     },
 
@@ -107,7 +120,7 @@
     },
 
     "clock": {
-        "format": "{:%I:%M}  ",
+        "format": "{:%I:%M}",
         "format-alt": "{:%A, %B %d, %Y (%R)}  ",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
@@ -117,11 +130,11 @@
                     "on-scroll"     : 1,
                     "on-click-right": "mode",
                     "format": {
-                              "months":     "<span color='#ffead3'><b>{}</b></span>",
-                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              "months":     "<span color='#f9e2af'><b>{}</b></span>",
+                              "days":       "<span color='#cba6f7'><b>{}</b></span>",
+                              "weeks":      "<span color='#a6e3a1'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#fab387'><b>{}</b></span>",
+                              "today":      "<span color='#f38ba8'><b><u>{}</u></b></span>"
                               }
                     },
         "actions":  {
@@ -149,17 +162,42 @@
        "exec": "waybar-module-pacman-updates | jq --unbuffered --compact-output"
    },
 
-    "custom/pacman": {
-        //"format": "{} ",
-        "format": "{} 󰮯",
+    "custom/eix": {
+        "format": "{}  ",
         "interval": 3600,                     			// every hour
-        //"exec": "(checkupdates;pacman -Qm | aur vercmp) | wc -l",	// # of updates
-        "exec": "(checkupdates;pacman -Qm | yay -Qu) | wc -l",
+        "exec": "(eix --installed --upgrade --format '<installedversions:NAMEVERSION>') | wc -l",
         "exec-if": "exit 0",                  			// always run; consider advanced run conditions
-        "on-click": "sleep 0.15 && foot sh -c 'yay; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8,
         "tooltip": false,
     },
+
+
+
+
+  "tray": {
+    "spacing": 10
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󰂑",
+      "headset": "󰂑",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+//  "clock": {
+//    "format": "{:%A %H:%M} ",
+//    "tooltip-format": "<tt>{calendar}</tt>"
+//  }
 
       "mpd": {
         "interval": 2,
@@ -176,9 +214,9 @@
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)",
 		// Commands to execute on events
-        "on-click": "sleep 0.15 && mpc toggle",
-        "on-click-middle": "sleep 0.15 && mpc prev",
-        "on-click-right": "sleep 0.15 && mpc next",
+        "on-click": "mpc toggle",
+        "on-click-middle": "mpc prev",
+        "on-click-right": "mpc next",
         "on-update": "",
         "on-scroll-up": "mpc seek +00:00:01",
         "on-scroll-down": "mpc seek -00:00:01",
@@ -189,7 +227,7 @@
         "interval": 5,
         "format": " {}%", // Icon: memory
         //"on-click": "xfce4-terminal -e 'htop'", 
-        "on-click": "sleep 0.15 && foot btop",
+        "on-click": "foot btop",
         "states": {
             "warning": 70,
             "critical": 90
@@ -203,77 +241,16 @@
             "warning": 70,
             "critical": 90,
         },
-        "on-click": "sleep 0.15 && foot -e 'htop'",
+        "on-click": "foot 'htop'",
     },
 
     "custom/hyprpicker": {
-        "format": "",
-        "on-click": "sleep 0.15 && exec hyprpicker -a",
+        //"format":" ",
+        "format":"",
+        //"on-click": "exec wofi -c ~/.config/wofi/config -I",
+        "on-click": "exec hyprpicker -a",
         "tooltip": false,
     },
-
-    "custom/recording": {
-	"exec": "$XDG_CONFIG_HOME/hypr/waybar/scripts/recording.sh status",
-	"format": "{}",
-	"on-click": "sleep 0.15 && $XDG_CONFIG_HOME/hypr/waybar/scripts/recording.sh toggle fullscreen",
-	"on-click-right": "sleep 0.15 && $XDG_CONFIG_HOME/hypr/waybar/scripts/recording.sh toggle region",
-	"restart-interval": 1,
-	"return-type": "json",
-	"tooltip": true
-    },
-
-"custom/wf-record": {
-		"format": "{}",
-		"interval": "once",
-		//"exec": "echo ''",
-                "exec": "echo ' '",
-		"tooltip": "false",
-		"exec-if": "pgrep 'wf-recorder'",
-		"on-click": "sleep 0.15 && exec $HOME/.config/hypr/waybar/scripts/wf-record.sh",
-		"signal": 8
-	},
-
-    "custom/cheat": {
-        "format": "",
-        /*"on-click": "zenity --text-info --filename=$HOME/.config/sway/cheatsheet.txt --width=800 --height=600",*/
-        "on-click": "sleep 0.15 && $HOME/.config/hypr/cheat.sh",
-        "tooltip": false,
-    },
-
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "",
-        "on-click": "sleep 0.15 && pamixer -t",
-        "on-click-right": "sleep 0.15 && pavucontrol",
-        "on-scroll-up": "pamixer -i 5",
-        "on-scroll-down": "pamixer -d 5",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        }
-    },
-
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "format-source": " {volume}%",
-        "format-source-muted": "",
-        "on-click": "sleep 0.15 && pamixer --default-source -t",
-        "on-click-right": "sleep 0.15 && pavucontrol",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
-    },
-
-    "tray": {
-        "icon-size": 18,
-        "spacing":10,
-     },
 
     "custom/notification": {
         "tooltip": false,
@@ -296,9 +273,62 @@
             "escape": true
       },
 
-      "custom/power": {
+      "custom/power1": {
           "format":"⏻",
-          "on-click": "sleep 0.15 && exec rofi_run_sway -pf",
+          /*"on-click": "exec wlogout -css $HOME/.config/wlogout/style.css -l $HOME/.config/wlogout/layout -b 5 -m 650 -c 50 -p layer-shell",*/
+          "on-click": "exec /home/ron/.config/hypr/waybar/scripts/powermenu-top.sh",
           "tooltip": false,
       },
+
+    //FOR POWER GROUP
+    "custom/arch": {
+        "format": "󰣇",
+        "tooltip": false,
+        "on-click": "wofi"
+    },
+    "custom/quit": {
+        "format": "󰍃",
+        "tooltip": false,
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/lock": {
+        "format": "󰌾",
+        "tooltip": false,
+        "on-click": "gtklock"
+    },
+    "custom/reboot": {
+        "format": "󰜉",
+        "tooltip": false,
+        "on-click": "(sleep 10 && reboot) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Reboot' 'The system will reboot in 10 seconds, click to cancel' && pkill sleep)",
+        "on-click-right": "reboot"
+    },
+    "custom/shutdown": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "(sleep 10 && shutdown now) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Shutdown' 'The system will shutdown in 10 seconds, click to cancel' && pkill sleep)",
+        "on-click-right": "shutdown now"
+    },
+    "custom/sleep": {
+        "format": "󰒲",
+        "tooltip": false,
+        "on-click": "systemctl suspend"
+    },
+
+    "group/power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/power1",
+            "custom/quit",
+            "custom/lock",
+            "custom/sleep",
+            "custom/reboot",
+            "custom/shutdown"
+        ]
+    }
+
 }
+
