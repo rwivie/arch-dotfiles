@@ -19,7 +19,7 @@ xrdb merge ~/.Xresources
 
 #==== set refresh rate
 # xrandr -q | grep " connected" | cut -d ' ' -f1
-xrandr --output DP-3 --mode 2560x1440 --rate 144.00
+xrandr --output DP-2 --mode 2560x1440 --rate 144.00
 
 #==== try to set dpi
 #xdpyinfo | grep -B 2 resolution (shows current)
@@ -27,7 +27,7 @@ xrandr --dpi 109
 
 #==== kunst exports
 export KUNST_SIZE="250x250"
-export KUNST_POSITION="+0+0"
+export KUNST_POSITION="+2270+1149"
 export KUNST_MUSIC_DIR="/home/ron/Music/"
 
 #==== for gnome
