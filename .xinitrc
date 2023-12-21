@@ -37,6 +37,22 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+## Here dkwm is kept as default
+#session=${1:-dkwm}
+
+#case $session in
+#    i3wm              ) exec i3wm;;
+#    dkwm              ) exec dkwm;;
+#    dwmwm             ) exec dwmwm;;
+##    kde               ) exec startplasma-x11;;
+#    xfce|xfce4        ) exec startxfce4;;
+#    fvwmwm            ) exec fvwmwm;;
+#    obwm              ) exec openbox-session;;
+#    gnwmx             ) exec gnwmx;;
+#    # No known session, try to run it as command
+#    *                 ) exec $1;;
+#esac
+
 #==== for gnome x11
 #export XDG_SESSION_TYPE=x11
 #export GDK_BACKEND=x11
@@ -47,17 +63,37 @@ fi
 #XDG_SESSION_TYPE=wayland dbus-run-session gnome-session # or use
 #gnome-shell --wayland
 
+#==== for budgie
+#export XDG_SESSION_TYPE="x11"
+#export XDG_CURRENT_DESKTOP=Budgie:GNOME
+#exec budgie-desktop
+
 #==== for dwm
 #export XDG_SESSION_DESKTOP="dwm"
 #export XDG_CURRENT_DESKTOP="dwm"
 #export XDG_SESSION_TYPE="x11"
 #exec dwmstart.sh
 
+#==== for bspwm
+#export XDG_SESSION_DESKTOP="bspwm"
+#export XDG_CURRENT_DESKTOP="bspwm"
+#export XDG_SESSION_TYPE="x11"
+#exec bspwm
+
 #==== for dk
-export XDG_SESSION_DESKTOP="dk"
-export XDG_CURRENT_DESKTOP="dk"
+#export XDG_SESSION_DESKTOP="dk"
+#export XDG_CURRENT_DESKTOP="dk"
+#export XDG_SESSION_TYPE="x11"
+#exec dk
+
+#==== for qtile
+export XDG_SESSION_DESKTOP="qtile"
+export XDG_CURRENT_DESKTOP="qtile"
 export XDG_SESSION_TYPE="x11"
-exec dk
+qtile start
+
+#==== for awesome
+#exec awesome
 
 #==== for i3 
 #export XDG_SESSION_TYPE="x11"
