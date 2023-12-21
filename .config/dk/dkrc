@@ -53,6 +53,7 @@ dkstart.sh &
 	dkcmd set ws=_ apply layout=tile master=1 stack=3 gap=10 msplit=0.5 ssplit=0.5
 
         #dkcmd set ws=_ pad left=0 right=0 top=0 bottom=0 gap=5
+	dkcmd set ws=1 layout=grid
 
 	# use grid layout, padding, and gaps on workspace 10
 	dkcmd set ws=10 layout=grid pad left=200 right=200 top=100 bottom=100 gap=50
@@ -190,6 +191,11 @@ dkstart.sh &
 
 	# open window(s) with a specific geometry and coordinates (floating only!)
 	dkcmd rule class="^google-chrome$" title="^open files$" float=true w=1280 h=720
+	dkcmd rule class="^Nsxiv$" instance="^Kunst$" float=true x=2270 y=1150 w=250 h=250 ws=7
+	dkcmd rule class="^St$" title="^ncmpcpp$" float=true x=20 y=45 w=1100 h=700 ws=7 focus=true
+	dkcmd rule class="^xterm$" title="^ncmpcpp$" float=true x=20 y=45 w=1100 h=700 ws=7 focus=true
+	dkcmd rule class="^kitty$" title="^ncmpcpp$" float=true x=20 y=45 w=1100 h=700 ws=7 focus=true
+	dkcmd rule class="^Alacritty$" title="^ncmpcpp$" float=true x=20 y=45 w=1100 h=700 ws=7 focus=true
 
 	# open window(s) with sticky and floating enabled to view on all workspaces.
 	dkcmd rule class="^stickyterm$" stick=true float=true w=1280 h=720
@@ -215,6 +221,10 @@ dkstart.sh &
         dkcmd rule class="^Smuxi-frontend-gnome$" ws=8 focus=true
 	dkcmd rule class="^Srain$" ws=8 focus=true
 	dkcmd rule class="^dev.geopjr.Tuba$" ws=8 focus=true
+	dkcmd rule class="^Cinny$" ws=8 focus=true
+	dkcmd rule class="^TelegramDesktop$" ws=8 focus=true
+	dkcmd rule class="^Element$" ws=8 focus=true
+	dkcmd rule class="^lemoa$" ws=8 focus=true
 	dkcmd rule class="^Chromium-browser$" ws=9 focus=true
 	dkcmd rule class="^Google-chrome$" ws=11 focus=true
 	dkcmd rule class="^thunderbird$" ws=9
