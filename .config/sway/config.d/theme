@@ -39,9 +39,9 @@ layer_effects "rofi" blur enable; blur_ignore_transparent enable; shadows enable
 layer_effects "gtk-layer-shell" blur enable; blur_ignore_transparent enable; shadows enable; corner_radius 15
 
 #==== Dim unfocused windows 0.1
-default_dim_inactive 0.3
-dim_inactive_colors.unfocused #000000FF
-dim_inactive_colors.urgent #900000FF
+#default_dim_inactive 0.3
+#dim_inactive_colors.unfocused #000000FF
+#dim_inactive_colors.urgent #900000FF
 
 # Set wallpaper:
 exec ~/.azotebg
