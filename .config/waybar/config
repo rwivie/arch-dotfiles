@@ -4,8 +4,8 @@
 {
   "layer": "top",
   "modules-left": ["custom/launcher", "sway/workspaces", "sway/window", "sway/mode"],
-  "modules-center": ["custom/wttrbar", "clock", "custom/updates"],
-  "modules-right": ["memory", "cpu", "mpd", "pulseaudio", "tray", "custom/power"],
+  "modules-center": ["custom/wttrbar", "clock", "custom/pacman"],
+  "modules-right": ["memory", "cpu", "mpd", "pulseaudio", "custom/headset", "tray", "group/power"],
 
     // Modules
 
@@ -41,7 +41,9 @@
             "6": "6: ",
             "7": "7: ",
             "8": "8: ",
-            "9": "9: ",
+            "9": "9: 󰊫",
+            "10": "10: ",
+            "11": "11: ",
         }
     },
 
@@ -119,7 +121,7 @@
        "exec": "waybar-module-pacman-updates | jq --unbuffered --compact-output"
    },
 
-    "custom/pacman": {
+/*    "custom/pacman": {
         //"format": "{} ",
         "format": "{} 󰮯",
         "interval": 3600,                     			// every hour
@@ -130,10 +132,18 @@
         "signal": 8,
         "tooltip": true,
         "tooltip-format": "{$HOME/.local/bin/news-archlinux.py}",
-    },
+    },*/
 
-
-
+"custom/pacman": {
+  "format": "{icon}{}",
+  "return-type": "json",
+  "format-icons": {
+    "pending-updates": " ",
+    "updated": ""
+  },
+  "exec-if": "which waybar-updates",
+  "exec": "waybar-updates"
+},
 
   "tray": {
     "spacing": 10
@@ -159,6 +169,14 @@
 //    "format": "{:%A %H:%M} ",
 //    "tooltip-format": "<tt>{calendar}</tt>"
 //  }
+
+"custom/headset": {
+     "format": " {icon}",
+     "return-type": "json",
+     "exec": "$HOME/.config/waybar/scripts/supower.py --model 'JBL T450BT'",
+     "interval": 5,
+     "format-icons": ["", "", "", "", ""]
+    },
 
       "mpd": {
         "interval": 2,
@@ -213,11 +231,61 @@
         "tooltip": false,
     },
 
-      "custom/power": {
+      "custom/power1": {
           "format":"⏻",
           "on-click": "exec wlogout -css $HOME/.config/wlogout/style.css -l $HOME/.config/wlogout/layout -b 5 -m 650 -c 50 -p layer-shell",
           "tooltip": false,
       },
+
+    //FOR POWER GROUP
+    "custom/arch": {
+        "format": "󰣇",
+        "tooltip": false,
+        "on-click": "wofi"
+    },
+    "custom/quit": {
+        "format": "󰍃",
+        "tooltip": false,
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/lock": {
+        "format": "󰌾",
+        "tooltip": false,
+        "on-click": "gtklock"
+    },
+    "custom/reboot": {
+        "format": "󰜉",
+        "tooltip": false,
+        "on-click": "(sleep 10 && reboot) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Reboot' 'The system will reboot in 10 seconds, click to cancel' && pkill sleep)",
+        "on-click-right": "reboot"
+    },
+    "custom/shutdown": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "(sleep 10 && shutdown now) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Shutdown' 'The system will shutdown in 10 seconds, click to cancel' && pkill sleep)",
+        "on-click-right": "shutdown now"
+    },
+    "custom/sleep": {
+        "format": "󰒲",
+        "tooltip": false,
+        "on-click": "systemctl suspend"
+    },
+
+    "group/power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/power1",
+            "custom/quit",
+            "custom/lock",
+            "custom/sleep",
+            "custom/reboot",
+            "custom/shutdown"
+        ]
+    }
 
 }
 
