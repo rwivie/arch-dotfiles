@@ -13,6 +13,9 @@ exec swayidle timeout 900 swaylock timeout 930 'swaymsg "output * power off"' re
 exec waycorner
 #exec steam-runtime -silent %U 2>/dev/null
 exec copyq --start-server
+#exec birdtray
+exec thunderbird
+exec valent
 
 # GTK3 applications take a long time to start
 #exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
