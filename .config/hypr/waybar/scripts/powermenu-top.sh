@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-op=$( echo -e " Poweroff\n  Reboot\n Suspend\n Lock\n Logout" | wofi -D hide_search=true -l 3 -L 6 --conf=$HOME/.config/wofi/config.power_top --style=$HOME/.config/wofi/style_power.css | awk '{print tolower($2)}' )
+op=$( echo -e " Poweroff\n  Reboot\n Suspend\n Lock\n Logout" | wofi -D hide_search=true -l 3 -L 6 --conf=$HOME/.config/hypr/wofi/config.power_top --style=$HOME/.config/hypr/wofi/style_power.css | awk '{print tolower($2)}' )
 
 case $op in 
         poweroff)
@@ -14,6 +14,6 @@ case $op in
 		swaylock
                 ;;
         logout)
-                hyprctl dispatch exit x
+                hyprctl dispatch exit
                 ;;
 esac
