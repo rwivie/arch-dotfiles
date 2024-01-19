@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Set your location inside the /etc/environment file using WTRLOC variable
-# Ex.: WTRLOC=Argentina
+# Ex.: WTRLOC=Argentina  WTRLOC=Coleman
 
 # Get the weather
 # %C is a weather type, %t is a temperature

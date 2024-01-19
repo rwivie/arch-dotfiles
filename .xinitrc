@@ -69,10 +69,11 @@ fi
 #exec budgie-desktop
 
 #==== for dwm
-#export XDG_SESSION_DESKTOP="dwm"
-#export XDG_CURRENT_DESKTOP="dwm"
-#export XDG_SESSION_TYPE="x11"
-#exec dwmstart.sh
+export XDG_SESSION_DESKTOP="dwm"
+export XDG_CURRENT_DESKTOP="dwm"
+export XDG_SESSION_TYPE="x11"
+##exec dwmstart.sh
+exec /home/ron/.config/dwm-6.4/dwm 2>&1 | tee ~/.dwm.log
 
 #==== for bspwm
 #export XDG_SESSION_DESKTOP="bspwm"
@@ -84,13 +85,14 @@ fi
 #export XDG_SESSION_DESKTOP="dk"
 #export XDG_CURRENT_DESKTOP="dk"
 #export XDG_SESSION_TYPE="x11"
+#exec dbus-run-session dk
 #exec dk
 
 #==== for qtile
-export XDG_SESSION_DESKTOP="qtile"
-export XDG_CURRENT_DESKTOP="qtile"
-export XDG_SESSION_TYPE="x11"
-qtile start
+#export XDG_SESSION_DESKTOP="qtile"
+#export XDG_CURRENT_DESKTOP="qtile"
+#export XDG_SESSION_TYPE="x11"
+#exec dbus-run-session qtile start
 
 #==== for awesome
 #exec awesome

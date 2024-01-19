@@ -22,14 +22,19 @@ smart_corner_radius on
 #==== shadows
 shadows on
 shadows_on_csd on
-shadow_blur_radius 10
+shadow_blur_radius 6
 shadow_color #0000007F
+shadow_offset 2 2
 
 #==== blur
 blur on
 blur_xray on
-blur_radius 5
+blur_radius 8
 blur_passes 3
+#blur_noise 0
+#blur_brightness 2
+#blur_contrast 0
+#blur_saturation 0
 
 #==== layer effects    sleep 10 && swaymsg -r -t get_outputs
 #layer_effects "waybar" blur enable; blur_ignore_transparent enable; shadows enable; corner_radius 0
@@ -58,8 +63,8 @@ for_window [shell="x_wayland"] title_format "%class - %title"
 ##everforset4  darkest #21292f
 ## class                 border  backgr. text    indicator child_border
 client.focused          #7fbbb3 #7fbbb3 #1a1826 #7fbbb3   #7fbbb3
-client.focused_inactive #384b55 #384b55 #ffffff #384b55   #384b55
-client.unfocused        #384b55 #384b55 #888888 #384b55   #384b55
+client.focused_inactive #2b3339 #2b3339 #ffffff #2b3339   #2b3339
+client.unfocused        #2b3339 #2b3339 #888888 #2b3339   #2b3339
 client.urgent           #cc241d #900000 #ffffff #cc241d   #cc241d
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 

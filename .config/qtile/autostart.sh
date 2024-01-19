@@ -13,3 +13,6 @@ pasystray --no-notify &
 nitrogen --restore &
 birdtray &
 valent &
+caffeine &
+/usr/bin/nohup /usr/bin/easyeffects --gapplication-service &
+#/usr/bin/easyeffects --gapplication-service &

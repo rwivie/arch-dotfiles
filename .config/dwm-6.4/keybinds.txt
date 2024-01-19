@@ -1,0 +1,16 @@
+# dwm keybinds
+Super+p			dmenu
+Super+d			dmenu
+Super+Shift+Return 	Term
+Super			rofi
+Super+x			rofi exit
+Alt+x			dmenu exit
+Alt+Tab			rofi window
+Alt+Shift+k		kunst
+Super+c			kill picom
+Alt+c			start picom
+Super+Control+c		rofi clipboard
+Alt+q			rofi calculate
+
+Super+b			toggle bar
+Alt+Shift+space		toggle floating

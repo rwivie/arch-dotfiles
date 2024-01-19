@@ -34,9 +34,9 @@ st.font:         JetBrainsMono Nerd Font:style:regular:pixelsize=16
 !st.borderpx: 0
 
 !- 0.1 to 0.9 = transparency
-st.alpha: 0.95
+!st.alpha: 0.8
 
-st.background: #1e2327
+!st.background: #1e2327
 !st.foreground: #eceff4
 !st.cursorColor: #81a1c1
 

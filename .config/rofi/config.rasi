@@ -5,6 +5,7 @@ configuration {
   icon-theme:         "Papirus";
   drun-display-format: "{icon} {name}";
   font: "JetBrainsMono Nerd Font 14";
+  kb-element-next: "space";
 }
 
 @theme "everforest"

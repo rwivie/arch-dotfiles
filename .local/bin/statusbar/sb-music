@@ -2,11 +2,11 @@
 # Display currently playing music metadata.
 
 case "$BLOCK_BUTTON" in
-    1) playerctl previous ;;
-    2) playerctl play-pause ;;
-    3) playerctl next ;;
-    4) playerctl position 5+ ;;
-    5) playerctl position 5- ;;
+    1) mpc prev ;;
+    2) mpc toggle ;;
+    3) mpc next ;;
+    4) mpc seek +5 ;;
+    5) mpc seek -5 ;;
     6) terminal -e "$EDITOR" "$0" ;;
 esac
 

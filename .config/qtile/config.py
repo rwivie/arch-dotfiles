@@ -33,6 +33,7 @@ from libqtile.lazy import lazy
 from qtile_extras import widget
 from qtile_extras.widget.decorations import BorderDecoration
 #from qtile_extras.widget import StatusNotifier
+from libqtile.scripts.main import VERSION
 import colors
 
 mod = "mod4"              # Sets mod key to SUPER/WINDOWS
@@ -65,7 +66,7 @@ def maximize_by_switching_layout(qtile):
 keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
-    Key([mod, "shift"], "Return", lazy.spawn("dm-run"), desc='Run Launcher'),
+#    Key([mod, "shift"], "Return", lazy.spawn("dm-run"), desc='Run Launcher'),
     Key([mod], "b", lazy.spawn(myBrowser), desc='Web browser'),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -74,16 +75,70 @@ keys = [
     Key([alt], "F1", lazy.spawn("rofi_run_qtile -d"), desc="rofi drun"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 
+#===============
+#==== dmenu ====
+#===============
+#    Key([mod, "shift"], "Return",
+#        lazy.run_extension(extension.DmenuRun(
+#            dmenu_prompt=">",
+#            #dmenu_font='-'.join([MYFONT, '18']),
+#            #background=BLACK,
+#            #foreground=GREEN,
+#            #selected_background=GREEN,
+#            #selected_foreground=WHITE))),
+#            dmenu_height=26,
+#            )
+#         )
+#    ),
+    Key([alt], 'Return', lazy.run_extension(extension.DmenuRun(
+        dmenu_prompt=">",
+#        dmenu_font="Andika-8",
+#        background="#15181a",
+#        foreground="#00ff00",
+#        selected_background="#079822",
+#        selected_foreground="#fff",
+#        dmenu_height=24,  # Only supported by some dmenu forks
+    ))),
+#===============
+
+#==========================
+#==== dmenu power menu ====
+#==========================
+#Key([mod], 'm', lazy.run_extension(extension.CommandSet(
+#    commands={
+#        'play/pause': '[ $(mocp -i | wc -l) -lt 2 ] && mocp -p || mocp -G',
+#        'next': 'mocp -f',
+#        'previous': 'mocp -r',
+#        'quit': 'mocp -x',
+#        'open': 'urxvt -e mocp',
+#        'shuffle': 'mocp -t shuffle',
+#        'repeat': 'mocp -t repeat',
+#        },
+#    pre_commands=['[ $(mocp -i | wc -l) -lt 1 ] && mocp -S'],
+#    **Theme.dmenu))),
+Key([mod], 'z', lazy.run_extension(extension.CommandSet(
+    commands={
+        ' Lock': 'lock',
+        ' Logout': 'qtile cmd-obj -o cmd -f shutdown',
+        ' Reboot': 'systemctl reboot',
+        ' Shutdown': 'systemctl -i poweroff',
+        },
+#    pre_commands=['[ $(mocp -i | wc -l) -lt 1 ] && mocp -S'],
+#    **Theme.dmenu
+))),
+
 #====================
 #==== media keys ====
 #====================
     Key([], "XF86AudioRaiseVolume", lazy.spawn("/home/ron/.local/bin/i3-volume -nPp up 5"), desc='Volume Up'),
     Key([], "XF86AudioLowerVolume", lazy.spawn("/home/ron/.local/bin/i3-volume -nPp down 5"), desc='volume down'),
     Key([], "XF86AudioMute", lazy.spawn("/home/ron/.local/bin/i3-volume mute -n"), desc='Volume Mute'),
-    Key([], "XF86AudioPlay", lazy.spawn("mpc toggle"), desc='mpc'),
-    Key([], "XF86AudioPrev", lazy.spawn("mpc prev"), desc='mpc'),
-    Key([], "XF86AudioNext", lazy.spawn("mpc next"), desc='mpc'),
-    Key([], "XF86Tools", lazy.spawn("alacritty --title ncmpcpp -e ncmpcpp"), desc="ncmpcpp"),
+    Key([], "XF86AudioPlay", lazy.spawn("mpc toggle"), desc='mpc toggle'),
+    Key([], "XF86AudioPrev", lazy.spawn("mpc prev"), desc='mpc prev'),
+    Key([], "XF86AudioNext", lazy.spawn("mpc next"), desc='mpc next'),
+    Key([], "XF86AudioStop", lazy.spawn("mpc stop"), desc='mpc stop'),
+#    Key([], "XF86Tools", lazy.spawn("alacritty --title ncmpcpp -e ncmpcpp"), desc="ncmpcpp"),
+    Key([], "XF86Tools", lazy.spawn("st -g 120x30+30+55 -c ncmpcpp -e ncmpcpp"), desc="ncmpcpp"),
 #====================
 
 #====================
@@ -92,11 +147,26 @@ keys = [
     Key([], "Print", lazy.spawn("ob-screenshot --in5"), desc="screenshot"),
 #====================
 
+#======================
+#==== toggle picom ====
+#======================
+    Key([mod], "c", lazy.spawn("qtile-isrunning-picom --toggle"), desc="toggle picom"),
+#======================
+
 #==============
 #==== misc ====
 #==============
-    Key([alt], "k", lazy.spawn("kunst"), desc="album art"),
+    Key([alt, "shift"], "k", lazy.spawn("kunst"), desc="album art"),
 #==============
+
+#================
+#==== spiral ====
+#================
+    Key([alt], "equal", lazy.layout.grow_main(), desc="Grow main when spiral"),
+    Key([alt], "minus", lazy.layout.shrink_main(), desc="Srink main when spiral"),
+    Key([alt], "j", lazy.layout.increase_ratio(), desc="increase other window size"),
+    Key([alt], "k", lazy.layout.decrease_ratio(), desc="Decrease other window size"),
+#================
     
     # Switch between windows
     # Some layouts like 'monadtall' only need to use j/k to move
@@ -184,7 +254,7 @@ groups = [
     Group(
         "1",
         label="1: ",
-        matches=[Match(wm_class="kitty")],
+        #matches=[Match(wm_class="kitty")],
         layout="spiral",
     ),
     Group(
@@ -220,8 +290,7 @@ groups = [
      Group(
 	"7",
 	label="7: ",
-	matches=[Match(wm_class="Cider, Mpdevil, Nsxiv"), Match(title="ncmpcpp")],
-	#matches=[Match(wm_title="ncmpcpp")],
+	matches=[Match(wm_class="Cider, Mpdevil, Nsxiv, ncmpcpp"), Match(title="ncmpcpp")],
 	layout="floating",
      ),
      Group(
@@ -233,7 +302,13 @@ groups = [
      Group(
 	"9",
 	label="9: 󰊫",
-	matches=[Match(wm_class="thunderbird, valent")],
+	matches=[Match(wm_class="thunderbird")],
+	layout="bsp",
+     ),
+     Group(
+	"0",
+	label="0: ",
+	matches=[Match(wm_class="valent, kdeconnect.sms, kdeconnect.handler, kdeconnect-indicator")],
 	layout="bsp",
      ),
 
@@ -291,8 +366,10 @@ colors = colors.everforest
 # Some settings that I use on almost every layout, which saves us
 # from having to type these out for each individual layout.
 layout_theme = {"border_width": 3,
-                "margin": 8,
+                "margin": 12,
                 "border_focus": colors[8],
+#                "border_focus": "#445055",
+#                "border_focus": [colors[0], colors[0], "#445055"],
                 "border_normal": colors[0]
                 }
 
@@ -300,12 +377,20 @@ layouts = [
     layout.Bsp(**layout_theme),
     layout.Floating(**layout_theme),
     layout.Columns(**layout_theme),
-    #layout.RatioTile(**layout_theme),
-    #layout.VerticalTile(**layout_theme),
-    layout.Spiral(**layout_theme),
+    layout.RatioTile(**layout_theme),
+    layout.VerticalTile(**layout_theme),
+#    layout.Spiral(**layout_theme),
+    layout.Spiral(
+         border_width = 3,
+         margin = 12,
+#         border_focus = colors[8],
+         border_focus = "#445055",
+         border_normal = colors[0],
+         new_client_position = 'after_current',
+         ),
     layout.Matrix(**layout_theme),
     layout.MonadTall(**layout_theme),
-    #layout.MonadWide(**layout_theme),
+    layout.MonadWide(**layout_theme),
     layout.Tile(
          shift_windows=True,
          border_width = 0,
@@ -316,30 +401,30 @@ layouts = [
          border_width = 0,
          margin = 0,
          ),
-    #layout.Stack(**layout_theme, num_stacks=2),
-    #layout.Columns(**layout_theme),
-    #layout.TreeTab(
-    #     font = "Ubuntu Bold",
-    #     fontsize = 11,
-    #     border_width = 0,
-    #     bg_color = colors[0],
-    #     active_bg = colors[8],
-    #     active_fg = colors[2],
-    #     inactive_bg = colors[1],
-    #     inactive_fg = colors[0],
-    #     padding_left = 8,
-    #     padding_x = 8,
-    #     padding_y = 6,
-    #     sections = ["ONE", "TWO", "THREE"],
-    #     section_fontsize = 10,
-    #     section_fg = colors[7],
-    #     section_top = 15,
-    #     section_bottom = 15,
-    #     level_shift = 8,
-    #     vspace = 3,
-    #     panel_width = 240
-    #     ),
-    #layout.Zoomy(**layout_theme),
+    layout.Stack(**layout_theme, num_stacks=2),
+    layout.Columns(**layout_theme),
+    layout.TreeTab(
+         font = "Ubuntu Bold",
+         fontsize = 11,
+         border_width = 0,
+         bg_color = colors[0],
+         active_bg = colors[8],
+         active_fg = colors[2],
+         inactive_bg = colors[1],
+         inactive_fg = colors[0],
+         padding_left = 8,
+         padding_x = 8,
+         padding_y = 6,
+         sections = ["ONE", "TWO", "THREE"],
+         section_fontsize = 10,
+         section_fg = colors[7],
+         section_top = 15,
+         section_bottom = 15,
+         level_shift = 8,
+         vspace = 3,
+         panel_width = 240
+         ),
+    layout.Zoomy(**layout_theme),
 ]
 
 # Some settings that I use on almost every widget, which saves us
@@ -349,11 +434,11 @@ widget_defaults = dict(
     #font = "JetBrainsMono Nerd font",
     fontsize = 12,
     padding = 0,
-    background=colors[0]
+#    background=colors[0]
+    background = '#2b3339',
 )
 
 extension_defaults = widget_defaults.copy()
-
 
 def init_widgets_list():
     widgets_list = [
@@ -370,13 +455,14 @@ def init_widgets_list():
                  foreground = colors[1]
         ),
         widget.GroupBox(
+                 font = "JetBrainsMono Nerd Font",
                  fontsize = 12,
                  margin_y = 3,
                  margin_x = 4,
                  padding_y = 2,
                  padding_x = 3,
                  borderwidth = 3,
-                 active = colors[8],
+                 active = colors[7],
                  inactive = colors[1],
                  rounded = False,
 	         #hide_unused = True,
@@ -384,65 +470,87 @@ def init_widgets_list():
                  highlight_method = "line",
                  this_current_screen_border = colors[7],
                  this_screen_border = colors [4],
-                 other_current_screen_border = colors[7],
+                 other_current_screen_border = colors[8],
                  other_screen_border = colors[4],
                  ),
-        widget.TextBox(
-                 text = '|',
-                 font = "Ubuntu Mono",
-                 foreground = colors[1],
-                 padding = 2,
-                 fontsize = 14
-                 ),
+        widget.Spacer(length = 8),
+#        widget.TextBox(
+#                 text = '|',
+#                 font = "Ubuntu Mono",
+#                 foreground = colors[1],
+#                 padding = 2,
+#                 fontsize = 14
+#                 ),
         widget.CurrentLayoutIcon(
                  custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons/layout-icons")],
-                 foreground = colors[1],
+                 foreground = colors[5],
                  padding = 0,
                  scale = 0.7
                  ),
         widget.CurrentLayout(
-                 #foreground = colors[1],
-                 foreground = '9da9a0',
+                 #foreground = colors[5],
+#                 font = "GoMono",
+#                 fontsize = "12",
+                 foreground = 'fab387',
                  padding = 5
                  ),
-        widget.TextBox(
-                 text = '|',
-                 font = "Ubuntu Mono",
-                 foreground = colors[1],
-                 padding = 2,
-                 fontsize = 14
-                 ),
+        widget.Spacer(length = 8),
+#        widget.TextBox(
+#                 text = '|',
+#                 font = "Ubuntu Mono",
+#                 foreground = colors[1],
+#                 padding = 2,
+#                 fontsize = 14
+#                 ),
         widget.WindowName(
+#                 font = "GoMono",
+#                 fontsize = "12",
                  foreground = colors[6],
                  max_chars = 40
                  ),
-        widget.Mpd2(
+        widget.WidgetBox(widgets=[
+                         widget.Mpd2(
+                             foreground = colors[7],
+                             idle_message="idle",
+                             idle_format="{play_status} {idle_message}",
+                             status_format="{play_status} {artist} - {title}",                 
+                             no_connection="",
+                             space="",
+                         ),
+                 ],
+                 close_button_location = 'left',
                  foreground = colors[7],
-                 idle_message="idle",
-                 #idle_format="{play_status} [{repeat}{random}{single}{consume}{updating_db}] {idle_message}",
-                 #status_format="{play_status} [{repeat}{random}{single}{consume}{updating_db}] {artist} - {title}",
-                 idle_format="{play_status} {idle_message}",
-                 status_format="{play_status} {artist} - {title}",                 
-                 no_connection="",
-                 space="",
+                 text_open = '󰋌 ',
+                 text_closed = '󰋌 ',
                  ),
+#        widget.Mpd2(
+#                 foreground = colors[7],
+#                 idle_message="idle",
+#                 #idle_format="{play_status} [{repeat}{random}{single}{consume}{updating_db}] {idle_message}",   󰋌 
+#                 #status_format="{play_status} [{repeat}{random}{single}{consume}{updating_db}] {artist} - {title}",
+#                 idle_format="{play_status} {idle_message}",
+#                 status_format="{play_status} {artist} - {title}",                 
+#                 no_connection="",
+#                 space="",
+#                 ),
         widget.Spacer(length = 8),
         widget.CheckUpdates(
                  update_interval = 1800,
-                 distro = "Arch_checkupdates",
-                 display_format = "󰮯 {updates} ",
+                 distro = "Arch_yay",
+                 display_format = "󰮯   {updates} ",
                  no_update_string = "󰮯 󰧟󰧟 󰊠",
                  foreground = colors[2], #[1]
                  colour_have_updates = colors[5], #[1]
                  colour_no_updates = colors[5], #[1]
                  mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo pacman -Syu')},
-                 padding = 5,
+                 #padding = 3,
                  #background = colors[6]
                  ),
 	widget.Spacer(length = 8),
         widget.CPU(
                  format = '▓  Cpu: {load_percent}%',
                  foreground = colors[4],
+                 font = "Ubuntu Bold",
                  decorations=[
                      BorderDecoration(
                          colour = colors[4],
@@ -453,9 +561,10 @@ def init_widgets_list():
         widget.Spacer(length = 8),
         widget.Memory(
                  foreground = colors[6],
+                 font = "Ubuntu Bold",
                  mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
                  format = '{MemUsed: .0f}{mm}',
-                 fmt = '🖥  Mem: {} used',
+                 fmt = '󰍛  Mem: {} used',
                  #measure_mem ='G',
                  decorations=[
                      BorderDecoration(
@@ -467,8 +576,10 @@ def init_widgets_list():
         widget.Spacer(length = 8),
         widget.Clock(
                  foreground = colors[8],
+                 font = "Ubuntu Bold",
                  mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('gsimplecal')},
-                 format = "⏱  %a, %b %d - %I:%M",
+                 #format = "⏱  %a, %b %d - %I:%M",
+                 format = "⏱  %a, %b %d   %I:%M %p",
                  decorations=[
                      BorderDecoration(
                          colour = colors[8],
@@ -477,7 +588,15 @@ def init_widgets_list():
                  ],
                  ),
         widget.Spacer(length = 8),
-        widget.Systray(padding = 3, icon_size = 16,),
+        widget.WidgetBox(widgets=[
+                 widget.Systray(padding = 3, icon_size = 16,),
+    ],
+                 close_button_location = 'left',
+                 foreground = colors[7],
+                 text_open = '',
+                 text_closed = '',
+),
+        #widget.Systray(padding = 3, icon_size = 16,),
         widget.Spacer(length = 8),
         widget.Image(
                  filename = "~/.config/qtile/icons/power_20.png",
@@ -563,6 +682,17 @@ floating_layout = layout.Floating(
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
     ]
 )
+
+#==== size and position for ncmpcpp
+#@hook.subscribe.client_new
+#def center_floating_win(window):
+#    wm_name = window.inspect()["name"]
+#    if wm_name == "ncmpcpp":
+#        window.toggle_floating()
+#        window.cmd_set_size_floating(1560, 1020)
+#        window.cmd_set_position_floating((30 - 55) // 2, (768 - 227) // 2)
+
+
 auto_fullscreen = True
 focus_on_window_activation = "focus"
 reconfigure_screens = True
@@ -587,4 +717,6 @@ def start_once():
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+#wmname = "LG3D"
+wmname = f"Qtile {VERSION}"
+

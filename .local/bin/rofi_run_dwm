@@ -83,10 +83,10 @@ else
                                         -theme-str 'inputbar {enabled: false;}' \
                                         -theme-str 'listview { lines: 4; }' -theme-str 'listview { columns: 1; }' \
 					-line-padding 4 -padding 5 -lines 4 <<< " Lock| Logout| Reboot| Shutdown")" in
-					*Lock) lock ;;
+					*Lock) slock ;;
 					*Reboot) systemctl reboot ;;
 					*Shutdown) systemctl -i poweroff ;;
-					*Logout) pkill dwm ;;
+					*Logout) loginctl terminate-user $USER ;;
 				esac
 				;;
 			-p|--power)
@@ -96,10 +96,10 @@ else
                                         -theme-str 'inputbar {enabled: false;}' \
                                         -theme-str 'listview { lines: 4; }' -theme-str 'listview { columns: 1; }' \
 					-line-padding 4 -padding 5 -lines 4 <<< " Lock| Logout| Reboot| Shutdown")" in
-					*Lock) lock ;;
+					*Lock) slock ;;
 					*Reboot) systemctl reboot ;;
 					*Shutdown) systemctl -i poweroff ;;
-					*Logout) pkill -KILL -u $USER ;;
+					*Logout) loginctl terminate-user $USER ;;
 				esac
 				;;
                          -pf|--powerf)
@@ -109,10 +109,10 @@ else
                                         -theme-str 'inputbar {enabled: false;}' \
                                         -theme-str 'listview { lines: 4; }' -theme-str 'listview { columns: 1; }' \
 					-line-padding 4 -padding 5 -lines 4 <<< " Lock| Logout| Reboot| Shutdown")" in
-					*Lock) lock ;;
+					*Lock) slock ;;
 					*Reboot) systemctl reboot ;;
 					*Shutdown) systemctl -i poweroff ;;
-					*Logout) pkill -KILL -u $USER ;;
+					*Logout) loginctl terminate-user $USER ;;
 				esac
 				;;
 			*)
