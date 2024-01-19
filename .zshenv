@@ -37,9 +37,16 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-if [ ! -w ${XDG_RUNTIME_DIR:="/run/user/$UID"} ]; then
-    echo "\$XDG_RUNTIME_DIR ($XDG_RUNTIME_DIR) not writable. Unsetting." >&2
-    unset XDG_RUNTIME_DIR
-else
-    export XDG_RUNTIME_DIR
-fi
+#==== for dbus
+#export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/dbus-session
+
+#==== xdg-runtime-dir
+#if [ ! -w ${XDG_RUNTIME_DIR:="/run/user/$UID"} ]; then
+#    echo "\$XDG_RUNTIME_DIR ($XDG_RUNTIME_DIR) not writable. Unsetting." >&2
+#    unset XDG_RUNTIME_DIR
+#else
+#    export XDG_RUNTIME_DIR
+#fi
+
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
